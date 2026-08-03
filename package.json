@@ -1,0 +1,16 @@
+{
+  "name": "mahmudul-hossain-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mahmudul Hossain — Full-Stack Engineer portfolio site",
+  "scripts": {
+    "setup": "node scripts/setup-assets.mjs",
+    "dev": "serve . -l 3000",
+    "start": "serve . -l 3000"
+  },
+  "devDependencies": {
+    "playwright": "^1.51.0",
+    "serve": "^14.2.4",
+    "sharp": "^0.33.5"
+  }
+}
