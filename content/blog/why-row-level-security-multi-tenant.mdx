@@ -1,0 +1,75 @@
+---
+title: "Why I Use Row-Level Security on Every Multi-Tenant Project"
+slug: why-row-level-security-multi-tenant
+excerpt: "Application-layer tenant checks fail in production. Here is why I default to PostgreSQL RLS for every multi-tenant SaaS I ship — and the patterns that actually hold up."
+coverImage: /assets/project-school.jpg
+publishedAt: "2026-01-15T09:00:00.000Z"
+updatedAt: "2026-02-01T14:30:00.000Z"
+tags:
+  - PostgreSQL
+  - Multi-tenant SaaS
+  - Security
+  - Supabase
+---
+
+If you are building a multi-tenant product and your tenant isolation lives only in application code, you are one missed `WHERE` clause away from a data breach. I have seen it happen on projects I was brought in to fix — not because the team was careless, but because humans forget filters under deadline pressure.
+
+Row-Level Security (RLS) moves that guarantee to the database. Every query is evaluated against policies tied to the authenticated role. No filter in your ORM? The database still refuses cross-tenant reads.
+
+## What RLS actually buys you
+
+RLS is not a silver bullet, but it is the closest thing to defense-in-depth you get without running separate databases per customer.
+
+- **Fail-closed by default** — without a matching policy, rows simply do not exist for that session.
+- **Works across every client** — admin dashboards, background jobs, ad-hoc SQL, BI tools. One policy surface.
+- **Auditable** — policies are schema objects you can review in migrations, not scattered string concatenation in services.
+
+The trade-off is complexity upfront. You need a clear session context (`current_setting('app.tenant_id')` or JWT claims in Supabase) and disciplined migration habits. That cost pays back the first time someone ships a feature without remembering the tenant scope.
+
+## The pattern I ship in production
+
+On Supabase and plain PostgreSQL alike, I follow the same skeleton:
+
+1. Enable RLS on every tenant-scoped table — no exceptions.
+2. Set tenant context at connection/request start from a verified JWT or session.
+3. Write policies as `USING` + `WITH CHECK` pairs so reads and writes both enforce scope.
+4. Keep a `service_role` bypass only for internal jobs, never exposed to the client.
+
+Here is a minimal policy shape I use on a `projects` table:
+
+```sql
+ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY tenant_isolation ON projects
+  FOR ALL
+  USING (tenant_id = current_setting('app.tenant_id')::uuid)
+  WITH CHECK (tenant_id = current_setting('app.tenant_id')::uuid);
+```
+
+In Supabase, I map `auth.jwt() ->> 'tenant_id'` instead of a custom setting — same idea, different hook.
+
+## When teams push back (and why I hold the line)
+
+> "RLS slows us down during prototyping."
+
+Fair — but prototyping without RLS on real tenant data is how prototypes become production with invisible debt. I enable RLS before the second tenant exists, not after a launch retrospective.
+
+> "We will add middleware checks instead."
+
+Middleware checks are necessary but not sufficient. They protect your HTTP layer. They do not protect the reporting query someone runs at 11pm, the migration script, or the new intern's GraphQL resolver.
+
+> "Our ORM handles scoping."
+
+Your ORM handles scoping when developers remember to scope. RLS handles scoping when they do not.
+
+## Checklist before you call a multi-tenant build "done"
+
+- RLS enabled on all tables containing tenant-owned data
+- Integration tests that attempt cross-tenant reads and expect zero rows
+- Background workers set tenant context explicitly — no implicit global access
+- Admin impersonation logged and time-boxed
+- Policies reviewed in every schema migration PR
+
+I treat RLS the way I treat HTTPS: non-negotiable on anything that holds customer data. The projects in my portfolio — school ERP with four portals, property SaaS, logistics platforms — all run this model. It is not academic; it is how I sleep at night when a client asks "can tenant A ever see tenant B's records?"
+
+If you are scoping a multi-tenant build and want someone who owns the schema policy layer end-to-end, [let's talk](/#contact).

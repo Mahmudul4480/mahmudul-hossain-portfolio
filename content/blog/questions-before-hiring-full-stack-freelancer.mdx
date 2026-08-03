@@ -1,0 +1,95 @@
+---
+title: "What a Client Should Ask Before Hiring a 'Full-Stack Freelancer'"
+slug: questions-before-hiring-full-stack-freelancer
+excerpt: "Most hiring guides protect agencies. This one protects you — the client — with the technical questions that reveal whether a solo engineer can actually own your product."
+coverImage: /assets/headshot.jpg
+publishedAt: "2026-03-01T09:00:00.000Z"
+tags:
+  - Freelancing
+  - Client Guide
+  - SaaS
+---
+
+I have turned down projects that looked lucrative because the fit was wrong. I have also watched clients burn months and budget on freelancers who could ship a landing page but could not own a database migration at 2am. The difference is not talent — it is whether you asked the right questions before signing.
+
+This is the conversation I wish every client had **before** the kickoff call, written from the side of the engineer who actually writes the code.
+
+## Question 1: "Show me something you shipped end-to-end — not a Figma link"
+
+Portfolio screenshots lie by omission. Ask for:
+
+- A live URL you can click through, including error states
+- What backend services power it (database, auth, payments, email)
+- What happens when you create two accounts and try to access each other's data
+
+If the answer is only front-end repos or "NDA prevented me from showing work," push for architecture diagrams or anonymized schema exports. Solo ownership means solo accountability across the stack.
+
+## Question 2: "Who writes the SQL migrations?"
+
+Full-stack should mean **full stack**, not "I call Supabase buttons until it works."
+
+Listen for specifics:
+
+- How do they handle rollbacks?
+- Do they use Row-Level Security for multi-tenant data?
+- Can they explain indexing choices on your core query paths?
+
+A freelancer who outsources database design to a plugin config is fine for MVPs with zero compliance requirements. It is not fine for B2B SaaS handling customer records.
+
+## Question 3: "What is your deployment and incident process?"
+
+Shipping is half the job. Operating is the other half.
+
+Ask directly:
+
+- Where does it deploy (Vercel, Fly, AWS, Railway)?
+- How do rollbacks work?
+- What monitoring exists beyond "I check it when you email me"?
+
+I document environment variables, run `npm run build` in CI, and leave README handoff notes because clients should not be hostage to tribal knowledge.
+
+## Question 4: "What will you refuse to do?"
+
+This question filters faster than any technical quiz.
+
+Strong solo engineers have boundaries:
+
+- They will not skip auth review to hit a demo date
+- They will not copy-paste payment flows from a tutorial without webhook verification
+- They will not pretend a no-code tool replaces a data model when scale is the goal
+
+If the answer is "anything you pay for," you are hiring a task rabbit, not an architect.
+
+## Red flags I tell friends to walk away from
+
+- **Cannot explain their last production outage** — everyone has them; evasion means no ownership.
+- **Quotes fixed price before scope discovery** — ballpark is fine; fantasy fixed bids become change-order wars.
+- **No version control hygiene** — "I will send zip files" in 2026 is a hard no.
+- **Mocks agency vocabulary** — "our team" when it is one person and three subcontractors is a transparency problem.
+
+## Green flags worth paying for
+
+- They ask about your **business constraints**, not just feature lists
+- They propose a phased roadmap with explicit trade-offs
+- They push back on a requirement that creates security debt
+- They write docs you can hand to the next developer without embarrassment
+
+## The meta-question: solo vs agency?
+
+Agencies optimize for utilization across a bench. A solo engineer optimizes for reputational survival on every commit — because their next client comes from the last one's referral.
+
+That is why I work solo by choice. When you hire me, you get the person on the architecture call **and** the person fixing the RLS policy. No telephone game.
+
+## Before you send the deposit
+
+Run through this short checklist:
+
+1. Live shipped work verified, not just Dribbble
+2. Database and auth ownership confirmed in writing
+3. Deployment, monitoring, and rollback discussed
+4. Scope document with out-of-scope items explicit
+5. Communication cadence agreed (async updates beat surprise meetings)
+
+The goal is not to trap a freelancer in interrogation lights. The goal is to discover whether you are buying a builder who treats your product like theirs — because that is the only model that scales when the agency roster is replaced by one engineer with a GitHub account and something to prove.
+
+If you are hiring for a SaaS build and want those questions answered upfront, [book a short call](/#contact). I would rather disqualify a bad fit in ten minutes than invoice you for ten weeks of regret.

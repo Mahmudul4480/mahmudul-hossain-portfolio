@@ -6,7 +6,7 @@ import sharp from "sharp";
 import { chromium } from "playwright";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const assets = join(root, "assets");
+const assets = join(root, "public", "assets");
 
 const projects = [
   {
@@ -32,10 +32,7 @@ async function createLogoMark() {
     <text x="50" y="68" font-size="54" font-family="monospace" fill="#5EEAD4" text-anchor="middle">M</text>
   </svg>`;
 
-  await sharp(Buffer.from(svg))
-    .resize(52, 52)
-    .png()
-    .toFile(join(assets, "logo-mark.png"));
+  await sharp(Buffer.from(svg)).resize(52, 52).png().toFile(join(assets, "logo-mark.png"));
 }
 
 async function createHeadshot() {

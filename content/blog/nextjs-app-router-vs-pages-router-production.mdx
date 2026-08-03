@@ -1,0 +1,75 @@
+---
+title: "Next.js App Router vs Pages Router: What I Actually Use in Production"
+slug: nextjs-app-router-vs-pages-router-production
+excerpt: "The App Router is not a religion. Here is how I choose between App Router and Pages Router on real client projects — and what I default to in 2026."
+coverImage: /assets/project-tideway.jpg
+publishedAt: "2026-02-10T09:00:00.000Z"
+updatedAt: "2026-02-20T11:00:00.000Z"
+tags:
+  - Next.js
+  - React
+  - Architecture
+---
+
+Every few months someone asks me to settle the App Router vs Pages Router debate like there is one correct answer. There is not. There is a correct answer **for a specific project constraints** — and that is what I optimize for when I take full technical ownership of a build.
+
+This site runs App Router. A client's internal admin tool might still run Pages Router. Both can be production-grade. The question is which set of trade-offs matches the product lifecycle you are in.
+
+## What App Router does better (in my experience)
+
+For marketing sites, content-heavy products, and SaaS dashboards where SEO and streaming matter, App Router is my default starting point in 2026.
+
+- **React Server Components** — less JavaScript shipped for read-heavy pages. Blog indexes, docs, landing pages benefit immediately.
+- **Colocated data fetching** — `async` server components remove an entire class of loading-state boilerplate.
+- **Built-in metadata API** — `generateMetadata`, sitemap routes, OG image routes without custom `_document` hacks.
+- **Layouts that do not remount** — nested layouts are genuinely useful for dashboards with persistent sidebars.
+
+When I migrated this portfolio to App Router, the win was not hype — it was deleting client-side data plumbing for static content and tightening Core Web Vitals with less JS.
+
+## Where Pages Router still earns its keep
+
+I am not ripping Pages Router out of stable codebases for ideology. It still wins when:
+
+- The team already has mature `getServerSideProps` / `getStaticProps` patterns and limited migration budget.
+- You rely heavily on ecosystem examples that have not updated to RSC idioms yet.
+- You need predictable, battle-tested API route behavior without edge-runtime surprises.
+- You are embedding Next inside a larger legacy system where incremental adoption matters more than greenfield ergonomics.
+
+Pages Router is maintenance mode, not obsolescence. Next.js still ships it. Production apps still run it. Pretending otherwise is performative.
+
+## My decision matrix on new projects
+
+| Signal                                              | Lean                                     |
+| --------------------------------------------------- | ---------------------------------------- |
+| Public SEO pages + blog/docs                        | App Router                               |
+| Authenticated dashboard, heavy client interactivity | App Router with client islands           |
+| Brownfield migration, tight deadline                | Pages Router (or hybrid)                 |
+| Team new to React Server Components                 | App Router, but budget time for learning |
+
+Hybrid is underrated. I routinely ship App Router for marketing and auth shell, then mount client-heavy features as isolated components — charts, drag-and-drop builders, real-time editors. You do not need the entire tree to be a server component to get the benefits.
+
+## Practical pitfalls I plan for upfront
+
+App Router's sharp edges are documented; they are still real on client timelines.
+
+### Caching semantics changed your mental model
+
+`fetch` caching defaults surprised teams in the 13.x cycle. I set explicit cache policies per route segment and verify behavior in staging — especially for anything that looks "dynamic" but is actually ISR-eligible.
+
+### "use client" boundaries need discipline
+
+Sprinkling `"use client"` at the layout level defeats the purpose. I draw boundaries at interactive widgets, not page wrappers.
+
+### Testing story is still catching up
+
+I invest in integration tests at the HTTP/route level and component tests on client islands. Unit-testing async server components is improving but not where Pages Router tooling was in 2022.
+
+## What I tell clients who ask "which should we use?"
+
+If you are starting today and hiring me to own the stack: **App Router**, with deliberate client boundaries and explicit caching rules documented in the repo.
+
+If you have a working Pages Router product and want feature velocity without a framework migration: **stay put**, harden what you have, migrate route-by-route only when there is a measurable payoff.
+
+The wrong choice is picking based on conference talks instead of delivery constraints. I optimize for what ships securely, performs under load, and stays maintainable when you are not paying an agency retainer.
+
+Want a second opinion on an in-flight Next.js architecture? [Email me](/#contact) with your repo constraints — I will give you a straight answer, not a framework sermon.
