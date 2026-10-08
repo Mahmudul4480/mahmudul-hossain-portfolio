@@ -1,16 +1,24 @@
 import { siteConfig } from "@/data/site";
+import { sectionImages } from "@/data/section-images";
 import Reveal from "./Reveal";
+import SectionVisual from "./SectionVisual";
 
 export default function WorkflowVideo() {
   return (
     <section className="section" id="workflow">
       <div className="wrap">
-        <Reveal className="section-head">
-          <div>
-            <p className="eyebrow">Watch it happen</p>
-            <h2>Workflow showcase</h2>
-          </div>
-        </Reveal>
+        <SectionVisual
+          imageSrc={sectionImages.workflow}
+          imageAlt="Mahmudul Hossain demonstrating workflow and deployment process"
+          imagePosition="left"
+        >
+          <p className="eyebrow">Watch it happen</p>
+          <h2>Workflow showcase</h2>
+          <p className="section-visual-lede">
+            A short look at how I write code, connect databases, and deploy secure Next.js
+            applications on Vercel and Cloudflare in real time.
+          </p>
+        </SectionVisual>
 
         <Reveal className="video-card">
           <div className="video-embed">

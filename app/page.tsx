@@ -11,12 +11,10 @@ import BlogPreview from "@/components/BlogPreview";
 import About from "@/components/About";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
-import JsonLd from "@/components/JsonLd";
 
 export default function HomePage() {
   return (
     <>
-      <JsonLd />
       <Link href="#main" className="skip-link">
         Skip to content
       </Link>

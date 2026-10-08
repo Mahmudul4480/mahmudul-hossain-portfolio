@@ -6,24 +6,16 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import type { BlogHeading, BlogPost, BlogPostFrontmatter } from "@/lib/blog-types";
 import { getTagSlug } from "@/lib/blog-utils";
+import { cmsPostToBlogPost, extractHeadingsFromContent } from "@/lib/cms/adapter";
+import { getAllCmsPosts, getCmsPostBySlug } from "@/lib/cms/posts.server";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
 function extractHeadings(content: string): BlogHeading[] {
-  const headings: BlogHeading[] = [];
-  const regex = /^(#{2,3})\s+(.+)$/gm;
-  let match: RegExpExecArray | null;
-
-  while ((match = regex.exec(content)) !== null) {
-    const level = match[1].length as 2 | 3;
-    const text = match[2].replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").trim();
-    headings.push({ id: getTagSlug(text), text, level });
-  }
-
-  return headings;
+  return extractHeadingsFromContent(content);
 }
 
-function parsePost(filename: string): BlogPost {
+function parseMdxPost(filename: string): BlogPost {
   const filePath = path.join(BLOG_DIR, filename);
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
@@ -34,21 +26,41 @@ function parsePost(filename: string): BlogPost {
     ...frontmatter,
     content,
     readingTimeMinutes: Math.max(1, Math.ceil(stats.minutes)),
+    source: "mdx",
+    metaTitle: frontmatter.metaTitle ?? frontmatter.title,
+    metaDescription: frontmatter.metaDescription ?? frontmatter.excerpt,
+    published: frontmatter.published !== false,
   };
 }
 
-export function getAllPosts(): BlogPost[] {
+function getMdxPosts(): BlogPost[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
 
   return fs
     .readdirSync(BLOG_DIR)
     .filter((file) => file.endsWith(".mdx"))
-    .map(parsePost)
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    .map(parseMdxPost);
+}
+
+function mergePosts(): BlogPost[] {
+  const cmsPosts = getAllCmsPosts(false).map(cmsPostToBlogPost);
+  const cmsSlugs = new Set(cmsPosts.map((p) => p.slug));
+  const mdxPosts = getMdxPosts().filter((p) => p.published !== false && !cmsSlugs.has(p.slug));
+
+  return [...cmsPosts, ...mdxPosts].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+}
+
+export function getAllPosts(): BlogPost[] {
+  return mergePosts();
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return getAllPosts().find((post) => post.slug === slug);
+  const cmsPost = getCmsPostBySlug(slug, false);
+  if (cmsPost) return cmsPostToBlogPost(cmsPost);
+
+  return getMdxPosts().find((post) => post.slug === slug);
 }
 
 export function getPostHeadings(slug: string): BlogHeading[] {

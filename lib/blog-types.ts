@@ -6,6 +6,11 @@ export interface BlogPostFrontmatter {
   publishedAt: string;
   updatedAt?: string;
   tags: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+  source?: "mdx" | "cms";
+  id?: string;
+  published?: boolean;
 }
 
 export interface BlogHeading {

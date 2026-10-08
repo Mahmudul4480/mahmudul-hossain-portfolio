@@ -1,28 +1,19 @@
-import Image from "next/image";
 import { siteConfig } from "@/data/site";
-import Reveal from "./Reveal";
+import { sectionImages } from "@/data/section-images";
+import SectionVisual from "./SectionVisual";
 
 export default function About() {
   return (
     <section className="section" id="about">
-      <div className="wrap about-grid">
-        <Reveal>
-          <div className="avatar-frame">
-            <Image
-              className="avatar-image"
-              src="/assets/headshot.jpg"
-              alt="Mahmudul Hossain — full-stack engineer and SaaS architect"
-              width={800}
-              height={1000}
-              sizes="(max-width: 860px) 100vw, 40vw"
-            />
-          </div>
-        </Reveal>
-
-        <Reveal className="about-copy">
+      <div className="wrap">
+        <SectionVisual
+          imageSrc={sectionImages.about}
+          imageAlt="Mahmudul Hossain, independent full-stack engineer and SaaS architect"
+          imagePosition="right"
+        >
           <p className="eyebrow">About</p>
-          <h2 style={{ marginBottom: 18 }}>Solo by choice, not by limitation</h2>
-          <p>
+          <h2>Solo by choice, not by limitation</h2>
+          <p className="section-visual-lede">
             I&apos;m <strong>{siteConfig.name}</strong>, an independent full-stack engineer and SaaS
             architect. I don&apos;t run an agency, and I don&apos;t outsource — every line of code
             across every project above was written by me.
@@ -52,7 +43,7 @@ export default function About() {
               <div className="l">Production SaaS platforms</div>
             </div>
           </div>
-        </Reveal>
+        </SectionVisual>
       </div>
     </section>
   );

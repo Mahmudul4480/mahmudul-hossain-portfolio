@@ -8,21 +8,19 @@ import Reveal from "@/components/Reveal";
 import { getAllPosts, getAllTags } from "@/lib/blog.server";
 import { toPostSummary } from "@/lib/blog-utils";
 import { siteConfig } from "@/data/site";
+import { buildPageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const blogDescription =
+  "Articles on multi-tenant SaaS, PostgreSQL RLS, Next.js architecture, and hiring technical freelancers — from Mahmudul Hossain, solo full-stack engineer.";
+
+export const metadata: Metadata = buildPageMetadata({
   title: "Blog — Notes on Engineering & Growth",
-  description:
-    "Articles on multi-tenant SaaS, PostgreSQL RLS, Next.js architecture, and hiring technical freelancers — from Mahmudul Hossain, solo full-stack engineer.",
-  alternates: {
-    canonical: `${siteConfig.url}/blog`,
-  },
-  openGraph: {
-    title: "Blog | Mahmudul Hossain",
-    description:
-      "Practical notes on shipping SaaS — engineering, architecture, and the stack behind production client work.",
-    url: `${siteConfig.url}/blog`,
-  },
-};
+  description: blogDescription,
+  path: "/blog",
+  keywords: ["engineering blog", "SaaS architecture", "Next.js", "PostgreSQL", siteConfig.name],
+});
+
+export const revalidate = 60;
 
 export default function BlogIndexPage() {
   const posts = getAllPosts().map(toPostSummary);
@@ -30,12 +28,33 @@ export default function BlogIndexPage() {
 
   const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Blog" }];
 
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${siteConfig.url}/blog#blog`,
+    name: `${siteConfig.name} — Blog`,
+    description: blogDescription,
+    url: `${siteConfig.url}/blog`,
+    inLanguage: "en",
+    author: { "@id": `${siteConfig.url}/#person` },
+    blogPost: posts.slice(0, 12).map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+    })),
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(blogJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd(breadcrumbItems, siteConfig.url)),
+          __html: jsonLd(breadcrumbJsonLd(breadcrumbItems, siteConfig.url)),
         }}
       />
       <Link href="#main" className="skip-link">

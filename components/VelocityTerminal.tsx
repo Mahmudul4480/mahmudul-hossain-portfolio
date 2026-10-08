@@ -1,4 +1,6 @@
 import Reveal from "./Reveal";
+import SectionVisual from "./SectionVisual";
+import { sectionImages } from "@/data/section-images";
 
 const steps = [
   {
@@ -26,17 +28,21 @@ const steps = [
 export default function VelocityTerminal() {
   return (
     <section className="section" id="workflow-log">
-      <div className="wrap velocity">
-        <Reveal>
+      <div className="wrap">
+        <SectionVisual
+          imageSrc={sectionImages.velocity}
+          imageAlt="Mahmudul Hossain using AI-native development workflow on laptop"
+          imagePosition="left"
+        >
           <p className="eyebrow">How I build fast</p>
           <h2>AI-native workflow, not AI-generated output</h2>
-          <p className="lede">
+          <p className="section-visual-lede">
             I use Cursor IDE and Claude Code to scaffold schemas, write migrations and generate UI
             boilerplate — eliminating manual coding latency. Every feature still gets shipped at
             production quality, because the saved time goes straight into custom business logic,
             authorization layers and edge-case testing, not corner-cutting.
           </p>
-        </Reveal>
+        </SectionVisual>
 
         <Reveal className="velocity-stack">
           <div className="code-panel">

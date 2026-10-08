@@ -4,7 +4,7 @@ export const siteConfig = {
   tagline: "Full-stack engineer · SaaS architect · Solo, no agency",
   description:
     "Independent full-stack engineer and SaaS architect specializing in Next.js, React, Node.js and secure multi-tenant database architecture. Solo developer. 100% technical ownership.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mahmudulhossain.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mahmudulhossain.com",
   email: "hello@mahmudulhossain.com",
   phone: "01761870650",
   whatsapp: "https://wa.me/8801761870650",
@@ -26,6 +26,21 @@ export const siteConfig = {
     { label: "Blog", href: "/blog" },
     { label: "Capabilities", href: "/#stack" },
     { label: "Contact", href: "/#contact" },
+  ],
+  /** Change this when homepage or service copy changes. Sitemap uses it as lastmod. */
+  contentUpdated: "2026-10-08",
+  locale: "en_US",
+  themeColor: "#090D16",
+  keywords: [
+    "Mahmudul Hossain",
+    "full-stack engineer",
+    "SaaS architect",
+    "Next.js developer",
+    "React developer",
+    "Node.js",
+    "multi-tenant SaaS",
+    "PostgreSQL",
+    "freelance developer",
   ],
   knowsAbout: [
     "Next.js",

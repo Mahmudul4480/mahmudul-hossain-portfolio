@@ -27,17 +27,19 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
 
-  const title = post.title;
+  const title = post.metaTitle ?? post.title;
+  const description = post.metaDescription ?? post.excerpt;
   const url = `${siteConfig.url}/blog/${post.slug}`;
   const ogImage = getPostOgImage(post, siteConfig.url);
 
   return {
     title,
-    description: post.excerpt,
+    description,
+    keywords: post.tags,
     alternates: { canonical: url },
     openGraph: {
       title,
-      description: post.excerpt,
+      description,
       url,
       type: "article",
       publishedTime: post.publishedAt,
@@ -49,11 +51,13 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
     twitter: {
       card: "summary_large_image",
       title,
-      description: post.excerpt,
+      description,
       images: [ogImage],
     },
   };
 }
+
+export const revalidate = 60;
 
 function articleJsonLd(post: BlogPost) {
   const image = getPostOgImage(post, siteConfig.url);

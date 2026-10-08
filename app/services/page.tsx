@@ -7,31 +7,43 @@ import Reveal from "@/components/Reveal";
 import Breadcrumb, { breadcrumbJsonLd } from "@/components/Breadcrumb";
 import { services } from "@/data/services";
 import { siteConfig } from "@/data/site";
+import { buildPageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const servicesDescription =
+  "Digital marketing, Facebook ads, SEO, social design, landing pages, and domain setup — delivered by one technical owner, not an agency roster.";
+
+export const metadata: Metadata = buildPageMetadata({
   title: "Services — Beyond Code, The Full Growth Stack",
-  description:
-    "Digital marketing, Facebook ads, SEO, social design, landing pages, and domain setup — delivered by one technical owner, not an agency roster.",
-  alternates: {
-    canonical: `${siteConfig.url}/services`,
-  },
-  openGraph: {
-    title: "Services | Mahmudul Hossain",
-    description:
-      "Digital marketing, Facebook ads, SEO, social design, landing pages, and domain setup — one solo technical owner.",
-    url: `${siteConfig.url}/services`,
-  },
-};
+  description: servicesDescription,
+  path: "/services",
+  keywords: ["digital marketing", "SEO services", "Facebook ads", "landing pages", siteConfig.name],
+});
 
 export default function ServicesIndexPage() {
   const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Services" }];
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Services",
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: service.name,
+      url: `${siteConfig.url}/services/${service.slug}`,
+    })),
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd(breadcrumbItems, siteConfig.url)),
+          __html: jsonLd(breadcrumbJsonLd(breadcrumbItems, siteConfig.url)),
         }}
       />
       <Link href="#main" className="skip-link">

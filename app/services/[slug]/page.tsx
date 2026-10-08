@@ -28,12 +28,13 @@ export function generateMetadata({ params }: ServicePageProps): Metadata {
   const service = getServiceBySlug(params.slug);
   if (!service) return {};
 
-  const title = `${service.metaTitle} | Mahmudul Hossain`;
+  const title = service.metaTitle;
   const url = `${siteConfig.url}/services/${service.slug}`;
 
   return {
     title,
     description: service.metaDescription,
+    keywords: [service.name, "Mahmudul Hossain", ...siteConfig.keywords.slice(0, 4)],
     alternates: { canonical: url },
     openGraph: {
       title,

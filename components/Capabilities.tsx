@@ -1,4 +1,6 @@
 import Reveal from "./Reveal";
+import SectionVisual from "./SectionVisual";
+import { sectionImages } from "@/data/section-images";
 
 const capabilities = [
   {
@@ -73,13 +75,17 @@ export default function Capabilities() {
   return (
     <section className="section" id="stack">
       <div className="wrap">
-        <Reveal className="section-head">
-          <div>
-            <p className="eyebrow">What I build with</p>
-            <h2>Core technical capabilities</h2>
-          </div>
-          <p>Five areas I own end to end on every engagement — no handoffs, no subcontracting.</p>
-        </Reveal>
+        <SectionVisual
+          imageSrc={sectionImages.capabilities}
+          imageAlt="Mahmudul Hossain reviewing technical capabilities on a dashboard"
+          imagePosition="right"
+        >
+          <p className="eyebrow">What I build with</p>
+          <h2>Core technical capabilities</h2>
+          <p className="section-visual-lede">
+            Five areas I own end to end on every engagement — no handoffs, no subcontracting.
+          </p>
+        </SectionVisual>
 
         <Reveal className="cap-grid">
           {capabilities.map((cap) => (

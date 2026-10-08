@@ -27,14 +27,24 @@ export function generateMetadata({ params }: TagPageProps): Metadata {
   const title = `${label} — Blog`;
   const url = `${siteConfig.url}/blog/tag/${params.tag}`;
 
+  const description = `Articles tagged "${label}" — engineering notes from ${siteConfig.name}.`;
+
   return {
     title,
-    description: `Articles tagged "${label}" — engineering notes from ${siteConfig.name}.`,
+    description,
+    keywords: [label, "blog", siteConfig.name],
     alternates: { canonical: url },
     openGraph: {
       title,
-      description: `Articles tagged "${label}" on the ${siteConfig.name} blog.`,
+      description,
       url,
+      siteName: siteConfig.name,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }

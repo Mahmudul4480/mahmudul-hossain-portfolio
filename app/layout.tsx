@@ -1,17 +1,34 @@
-import type { Metadata } from "next";
-import { fontVariables, inter, jetbrainsMono, spaceGrotesk } from "@/lib/fonts";
+import type { Metadata, Viewport } from "next";
+import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/data/site";
+import { fontVariables, inter, jetbrainsMono, spaceGrotesk } from "@/lib/fonts";
 import "./globals.css";
 
 const siteUrl = siteConfig.url;
+const defaultTitle = `${siteConfig.name} — ${siteConfig.title}`;
+
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const bingVerification = process.env.BING_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: siteConfig.name,
   title: {
-    default: `${siteConfig.name} — ${siteConfig.title}`,
+    default: defaultTitle,
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: siteConfig.name, url: siteUrl }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "technology",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: siteUrl,
     types: {
@@ -23,43 +40,50 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.locale,
     url: siteUrl,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.title}`,
+    title: defaultTitle,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.title}`,
+    title: defaultTitle,
     description: siteConfig.description,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  ...(googleVerification || bingVerification
+    ? {
+        verification: {
+          ...(googleVerification ? { google: googleVerification } : {}),
+          ...(bingVerification ? { other: { "msvalidate.01": bingVerification } } : {}),
+        },
+      }
+    : {}),
 };
 
-function organizationJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/icon.svg`,
-    email: siteConfig.email,
-    sameAs: [siteConfig.socials.github, siteConfig.socials.linkedin],
-  };
-}
+export const viewport: Viewport = {
+  themeColor: siteConfig.themeColor,
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${fontVariables} ${inter.className}`} suppressHydrationWarning>
       <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
-        />
+        <JsonLd />
         {children}
       </body>
     </html>
