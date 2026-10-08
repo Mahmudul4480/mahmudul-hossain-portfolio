@@ -7,7 +7,8 @@ import "./globals.css";
 const siteUrl = siteConfig.url;
 const defaultTitle = `${siteConfig.name} — ${siteConfig.title}`;
 
-const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const googleVerification =
+  process.env.GOOGLE_SITE_VERIFICATION ?? "8cO67QbCqHube5qUnPp7F1lYB20GSPndA2EB04PBVr8";
 const bingVerification = process.env.BING_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
