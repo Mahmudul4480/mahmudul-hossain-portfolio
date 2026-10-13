@@ -31,8 +31,8 @@ export const projects: Project[] = [
     title: "Tide Way Shipping OPC",
     kicker: "Maritime Logistics Platform",
     description:
-      "Interactive GIS mapping and vessel tracking on the Mapbox API, with a secure B2B quote ingestion pipeline and a responsive Tailwind UI.",
-    tags: ["Mapbox GIS", "B2B Quotes", "Tailwind"],
+      "Maritime logistics website with an instant freight rate estimator, plus a custom SVG vessel tracking map with simulated fleet movement in a role-based operations demo — responsive Tailwind UI.",
+    tags: ["SVG vessel map", "Rate estimator", "Tailwind"],
     liveUrl: "https://www.tidewayshipping.com",
     browserUrl: "tidewayshipping.com",
     image: "/assets/project-tideway.jpg",
