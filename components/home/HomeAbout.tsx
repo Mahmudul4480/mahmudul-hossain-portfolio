@@ -19,8 +19,8 @@ export default function HomeAbout() {
           <Image
             src={sectionImages.about}
             alt="Mahmudul Hossain, independent full-stack engineer and SaaS architect"
-            width={1600}
-            height={1066}
+            width={2400}
+            height={1340}
             className="h-expand-img"
             sizes="100vw"
           />

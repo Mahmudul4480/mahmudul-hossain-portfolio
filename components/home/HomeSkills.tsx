@@ -74,10 +74,10 @@ export default function HomeSkills() {
           </p>
           <Image
             src={sectionImages.capabilities}
-            alt="Mahmudul Hossain reviewing technical capabilities on a dashboard"
-            width={720}
-            height={540}
-            className="h-side-photo"
+            alt="Mahmudul Hossain working at a laptop"
+            width={2400}
+            height={1792}
+            className="h-side-photo h-skills-photo"
             sizes="(max-width: 900px) 100vw, 360px"
           />
         </div>

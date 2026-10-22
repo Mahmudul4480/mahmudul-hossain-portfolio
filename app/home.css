@@ -518,7 +518,7 @@
   width: 100%;
   height: min(80vh, 860px);
   object-fit: cover;
-  object-position: center top;
+  object-position: 72% 30%;
 }
 
 .h-split {
@@ -731,6 +731,10 @@
   object-fit: cover;
   object-position: center 12%;
   aspect-ratio: 4 / 3;
+}
+
+.h-side-photo.h-skills-photo {
+  object-position: center 30%;
 }
 
 .h-side-photo-light {
