@@ -3,6 +3,7 @@ import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/data/site";
 import { fontVariables, inter, jetbrainsMono, spaceGrotesk } from "@/lib/fonts";
 import "./globals.css";
+import "./home.css";
 
 const siteUrl = siteConfig.url;
 const defaultTitle = `${siteConfig.name} — ${siteConfig.title}`;

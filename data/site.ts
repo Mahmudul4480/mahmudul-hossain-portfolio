@@ -28,7 +28,7 @@ export const siteConfig = {
     { label: "Contact", href: "/#contact" },
   ],
   /** Change this when homepage or service copy changes. Sitemap uses it as lastmod. */
-  contentUpdated: "2026-10-08",
+  contentUpdated: "2026-10-22",
   locale: "en_US",
   themeColor: "#090D16",
   keywords: [
