@@ -770,7 +770,7 @@
   animation-duration: 48s;
 }
 
-.h-marquee-track span {
+.h-marquee-track > span {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -787,25 +787,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   flex: 0 0 auto;
+  overflow: visible;
 }
 
 .h-skill-icon-slot.is-chip {
-  border-radius: 5px;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
   background: #f6f3ec;
 }
 
 .h-skill-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: block;
-}
-
-.h-skill-icon-slot.is-chip .h-skill-icon {
-  width: 13px;
-  height: 13px;
+  flex: none;
 }
 
 .h-cap-grid {
