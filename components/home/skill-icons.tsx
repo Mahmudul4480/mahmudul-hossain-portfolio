@@ -54,12 +54,49 @@ export const skillIconPaths: Record<string, string> = {
   PWA: "M7.2 2.4h9.6c1.2 0 2.2 1 2.2 2.2v14.8c0 1.2-1 2.2-2.2 2.2H7.2c-1.2 0-2.2-1-2.2-2.2V4.6c0-1.2 1-2.2 2.2-2.2zm.9 3.1v10.2h7.8V5.5H8.1zm2.9 11.6h2v1.35h-2V17.1z",
 };
 
+/** Simple Icons hex values. Custom marks use the site orange and teal. */
+const skillIconColors: Record<string, string> = {
+  "Next.js": "#000000",
+  React: "#61DAFB",
+  "Node.js": "#5FA04E",
+  TypeScript: "#3178C6",
+  PostgreSQL: "#4169E1",
+  Supabase: "#3FCF8E",
+  Firebase: "#DD2C00",
+  "Tailwind CSS": "#06B6D4",
+  Vercel: "#000000",
+  Cloudflare: "#F38020",
+  Express: "#0A0A0A",
+  NestJS: "#E0234E",
+  GraphQL: "#E10098",
+  MongoDB: "#47A248",
+  Stripe: "#635BFF",
+  Resend: "#000000",
+  Claude: "#D97757",
+  "shadcn/ui": "#000000",
+  "Framer Motion": "#0055FF",
+  OpenAI: "#412991",
+  Twilio: "#F22F46",
+  "Multi-tenant SaaS": "#F2A93B",
+  "Row Level Security": "#5EEAD4",
+  REST: "#F2A93B",
+  Mollie: "#5EEAD4",
+  PWA: "#F2A93B",
+};
+
+/** Near-black and deep-purple marks need a light chip on the dark pills. */
+const skillIconChips = new Set(["Next.js", "Vercel", "Express", "Resend", "shadcn/ui", "OpenAI"]);
+
 export function SkillIcon({ name }: { name: string }) {
   const d = skillIconPaths[name];
-  if (!d) return null;
+  const color = skillIconColors[name];
+  if (!d || !color) return null;
+  const chip = skillIconChips.has(name);
   return (
-    <svg className="h-skill-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path fill="currentColor" d={d} />
-    </svg>
+    <span className={chip ? "h-skill-icon-slot is-chip" : "h-skill-icon-slot"}>
+      <svg className="h-skill-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill={color} d={d} />
+      </svg>
+    </span>
   );
 }

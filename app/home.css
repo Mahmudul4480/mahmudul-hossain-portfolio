@@ -783,11 +783,29 @@
   white-space: nowrap;
 }
 
+.h-skill-icon-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
+.h-skill-icon-slot.is-chip {
+  border-radius: 5px;
+  background: #f6f3ec;
+}
+
 .h-skill-icon {
   width: 16px;
   height: 16px;
-  flex: 0 0 auto;
   display: block;
+}
+
+.h-skill-icon-slot.is-chip .h-skill-icon {
+  width: 13px;
+  height: 13px;
 }
 
 .h-cap-grid {
