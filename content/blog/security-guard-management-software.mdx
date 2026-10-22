@@ -1,0 +1,111 @@
+---
+title: "Security Guard Management Software: Rosters, Attendance & Multi-Site Control"
+slug: security-guard-management-software
+excerpt: "How I built security guard management software that blocks double-booking, flags absences, warns on hour caps and gives every site its own secure workspace."
+coverImage: /assets/security-guard-management-software.png
+publishedAt: "2026-10-21T09:00:00.000Z"
+updatedAt: "2026-10-21T09:00:00.000Z"
+tags:
+  - Case Study
+  - Security Industry
+  - Next.js
+  - PostgreSQL
+---
+
+It's 5:40 a.m. The night shift ends in twenty minutes, and you've just discovered the guard you rostered for the morning post is already booked at another site. Someone built the roster in a spreadsheet, someone else changed it on WhatsApp, and nobody noticed the clash. If that sounds familiar, this post is for you. I built **security guard management software** to stop exactly that kind of failure, and here is what it does, how it works and what it can do for a multi-site security company.
+
+## The real cost of running guards on spreadsheets
+
+If you run a guarding company in Europe, the US or Canada, you already know where the hours go:
+
+- **Double-booked guards.** One person ends up on two posts at once, and you find out when a post is empty.
+- **Manual rosters every day.** Supervisors rebuild tomorrow's roster from scratch, even when most of it hasn't changed.
+- **Overworked staff.** Nobody notices a guard drifting past safe daily, weekly or monthly hours until there's a complaint or an audit.
+- **Silent no-shows.** A guard misses day after day and still gets assigned new shifts.
+- **No record of who changed what.** When a client disputes a shift, there's no reliable history to point to.
+- **Everyone sees everything.** Site supervisors can read data for sites they have nothing to do with, including guards' personal details.
+
+None of these are exotic problems. They're what happens when operations scale faster than the tools behind them.
+
+## What the platform does
+
+**GSDBD-SY Duty Ops** is a guard operations platform I designed and built for a multi-site guard operation. Phase 1 covers the full daily workflow — from guard registry to roster, attendance and reports. A public demo runs at [gsdbd-duty-ops-demo.vercel.app](https://gsdbd-duty-ops-demo.vercel.app) with sample data (6 sites, 263 sample personnel and about five weeks of roster and attendance history); the client's live instance runs separately on its own database.
+
+### Duty rosters that can't double-book
+
+The daily and calendar roster lets supervisors assign guards to duty posts and shifts. The key detail: **double-booking is blocked twice** — once in the interface and again in the database itself, using a PostgreSQL [exclusion constraint](https://www.postgresql.org/docs/current/ddl-constraints.html) that rejects any overlapping active assignment for the same guard. Even a bug or a rushed edit can't put one person on two posts at the same time.
+
+### Rosters that carry forward
+
+When a new day has no roster yet, the platform carries forward the latest regular roster for that site. Guards who were away return to their own post, temporary cover (proxy) assignments don't carry over, and past dates are never touched. Supervisors adjust exceptions instead of rebuilding the whole day.
+
+### Cover for absent guards
+
+When a guard is away, a supervisor can assign a proxy to cover that specific assignment, and the link between the original duty and the cover is stored. You always know who was supposed to be there and who actually covered.
+
+### Hour-cap warnings with a logged override
+
+The system warns when an assignment would push a guard past **8 hours a day, 48 a week or 208 a month**. A supervisor can still override when the situation demands it — but the override is logged, so there's an audit trail.
+
+### Attendance and a 10-day absence flag
+
+Supervisors mark attendance as present, absent or late. If a guard racks up 10 consecutive absences, the platform flags them and **blocks new assignments** until someone reviews the case. No more rostering people who've effectively left.
+
+### Dashboard, reports and exports
+
+- A command dashboard with live coverage across sites.
+- Printable daily, monthly and per-guard reports.
+- Excel exports for payroll or client reporting.
+- A change log of roster edits.
+
+### Guard registry
+
+A paginated guard registry with bio data, quick registration and lookup by a per-site Unique ID (for example `SDS-014`), plus manageable sites, duty posts, shifts and contractor companies.
+
+## Built for multi-site security companies
+
+This is where security guard management software earns its keep: one company, many client sites, many supervisors.
+
+### Every site gets its own secure workspace
+
+The platform has distinct roles — Super Admin, Site Admin and read-only Viewer. Site Admins can only read and write data for their own sites, and that rule is enforced **on the server, not just hidden in the UI** — the approach recommended in the [OWASP guidance on broken access control](https://owasp.org/Top10/A01_2021-Broken_Access_Control/). I take the same isolation-first approach on every multi-tenant build, as I explain in [why I use row-level security on every multi-tenant project](/blog/why-row-level-security-multi-tenant).
+
+### Accountability built in
+
+- Viewing a guard's profile writes an audit record, so access to personal data is traceable.
+- Logins and role changes are audited.
+- Invite and password-reset tokens are stored only as SHA-256 hashes.
+
+### Works on supervisors' phones
+
+The platform is an installable [Progressive Web App](https://web.dev/explore/progressive-web-apps) with an offline fallback for recently loaded roster data — useful when a supervisor is on a site with patchy signal. It also includes an English/Bangla language switcher.
+
+## Under the hood
+
+For technical decision-makers, the stack is deliberately boring and reliable:
+
+- **Next.js 16 and React 19** with TypeScript and Tailwind CSS.
+- **Prisma** over **PostgreSQL** in production (SQLite for local development), with versioned migrations.
+- **Server actions** validated with Zod, JWT sessions via `jose`, passwords hashed with bcrypt.
+- **ExcelJS** for exports and Recharts for dashboard charts.
+- Deployed on **Vercel**, with the demo and live sites as separate projects and separate databases, so demo data never touches real data.
+
+I wrote every part of it myself — schema, business rules, UI and deployment — the same end-to-end ownership I brought to my [shipping management software case study](/blog/shipping-management-software-case-study).
+
+## What this means for your operation
+
+- **Fewer empty posts:** a guard physically can't be booked on two overlapping shifts.
+- **Less admin each morning:** rosters roll forward; supervisors handle only the exceptions.
+- **Safer working hours:** daily, weekly and monthly caps are checked automatically, and overrides are on record.
+- **Cleaner records:** attendance, roster changes and profile views are logged.
+- **Data that stays where it belongs:** each site's supervisors see only their own sites.
+
+### What it doesn't do (yet)
+
+To be clear about scope: Phase 1 does not include GPS patrol tracking, checkpoint scanning or client invoicing. Those are natural next phases, and because the data model already ties guards, posts, shifts and attendance together, they can be built on top rather than bolted on.
+
+## Ready for security guard management software built around your operation?
+
+Off-the-shelf tools force you into someone else's workflow. If your rules — shift patterns, hour caps, site structure, reporting — don't fit a template, custom security guard management software can match how your company actually works. I build these platforms solo, end to end, and I can adapt this foundation to your sites, your roles and your compliance needs. See the full range of [web and software services I offer](/services).
+
+**[Get in touch for a short project call](/#contact)** — tell me how many sites and guards you manage and where the roster breaks today, and I'll come back with a clear plan and a realistic timeline.
