@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SkillIcon } from "@/components/home/skill-icons";
 import { sectionImages } from "@/data/section-images";
 import { siteConfig } from "@/data/site";
 
@@ -87,7 +88,10 @@ export default function HomeSkills() {
               <div key={index} className={`h-marquee-row${index % 2 ? " is-rev" : ""}`}>
                 <div className="h-marquee-track">
                   {[...row, ...row].map((skill, skillIndex) => (
-                    <span key={`${skill}-${skillIndex}`}>{skill}</span>
+                    <span key={`${skill}-${skillIndex}`}>
+                      <SkillIcon name={skill} />
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </div>

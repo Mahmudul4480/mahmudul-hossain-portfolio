@@ -90,12 +90,13 @@
   background: #2a241c;
 }
 
-/* Fluid */
+/* Cursor glow. Screen blend only lightens, so type stays readable. */
 .h-fluid {
   position: fixed;
   inset: 0;
   z-index: 5;
   pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 .h-fluid-canvas,
@@ -108,8 +109,8 @@
 
 .h-fluid-fallback {
   background:
-    radial-gradient(420px 280px at 18% 30%, rgba(242, 169, 59, 0.28), transparent 70%),
-    radial-gradient(380px 260px at 78% 62%, rgba(94, 234, 212, 0.22), transparent 70%);
+    radial-gradient(200px 150px at 76% 20%, rgba(242, 169, 59, 0.2), transparent 72%),
+    radial-gradient(170px 130px at 22% 74%, rgba(94, 234, 212, 0.14), transparent 72%);
 }
 
 .h-fluid.is-live .h-fluid-fallback {
@@ -515,8 +516,9 @@
 
 .h-expand-img {
   width: 100%;
-  height: min(72vh, 760px);
+  height: min(80vh, 860px);
   object-fit: cover;
+  object-position: center top;
 }
 
 .h-split {
@@ -727,6 +729,7 @@
   border-radius: 18px;
   margin-top: 28px;
   object-fit: cover;
+  object-position: center 12%;
   aspect-ratio: 4 / 3;
 }
 
@@ -770,6 +773,7 @@
 .h-marquee-track span {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid rgba(246, 243, 236, 0.18);
@@ -777,6 +781,13 @@
   color: #f6f3ec;
   font-size: 14px;
   white-space: nowrap;
+}
+
+.h-skill-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  display: block;
 }
 
 .h-cap-grid {
@@ -1157,7 +1168,7 @@
   width: min(100%, 520px);
   height: 280px;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 12%;
   border-radius: 24px;
   margin: 0 auto 36px;
 }
