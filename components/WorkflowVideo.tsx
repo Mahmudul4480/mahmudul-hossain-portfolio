@@ -5,7 +5,7 @@ import SectionVisual from "./SectionVisual";
 
 export default function WorkflowVideo() {
   return (
-    <section className="section" id="workflow">
+    <section className="section" id="workflow" data-tone="dark">
       <div className="wrap">
         <SectionVisual
           imageSrc={sectionImages.workflow}

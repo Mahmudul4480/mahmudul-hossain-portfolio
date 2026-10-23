@@ -8,7 +8,7 @@ export default function BlogPreview() {
   const posts = getLatestPosts(3).map(toPostSummary);
 
   return (
-    <section className="section" id="blog-preview">
+    <section className="section" id="blog-preview" data-tone="light">
       <div className="wrap">
         <Reveal className="section-head">
           <div>
