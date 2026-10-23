@@ -47,7 +47,7 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/#contact"
             className="btn btn-primary btn-small"
             onClick={() => setOpen(false)}
           >

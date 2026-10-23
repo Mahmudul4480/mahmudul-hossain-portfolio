@@ -134,15 +134,12 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
                   <strong>{service.startingPrice}</strong>
                 </div>
                 <div className="hero-ctas">
-                  {service.ctaHref ? (
-                    <Link className="btn btn-primary" href={service.ctaHref}>
-                      {service.ctaLabel ?? "Get a quote"}
-                    </Link>
-                  ) : (
-                    <a className="btn btn-primary" href={`mailto:${siteConfig.email}`}>
-                      Get a quote
-                    </a>
-                  )}
+                  <Link
+                    className="btn btn-primary"
+                    href={service.ctaHref ?? `/?service=${service.slug}#contact`}
+                  >
+                    {service.ctaLabel ?? "Get a quote"}
+                  </Link>
                   <Link href="/services" className="btn btn-ghost">
                     All services
                   </Link>

@@ -57,7 +57,7 @@ export const services: Service[] = [
     metaTitle: "PHP2Shell Fix & Emergency PHP Patch Service (CVE-2026-109618)",
     metaDescription:
       "Need to fix PHP2Shell (CVE-2026-109618 / CVE-2026-109619)? Mahmudul Hossain patches PHP, checks WordPress & PHP sites for compromise and hardens them. US, UK, EU & Canada.",
-    ctaHref: "/#contact",
+    ctaHref: "/?service=php2shell-emergency-patch#contact",
     ctaLabel: "Book a PHP2Shell patch",
     sections: [
       {

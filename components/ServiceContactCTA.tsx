@@ -30,7 +30,7 @@ export default function ServiceContactCTA({
               Email me
             </a>
             <a className="btn btn-ghost" href="/#contact">
-              View contact options
+              Request a quote
             </a>
           </div>
           <div className="contact-meta">

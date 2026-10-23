@@ -20,7 +20,7 @@ export default function HomeUrgent() {
           <Link href="/services/php2shell-emergency-patch" className="btn h-urgent-btn">
             See the PHP2Shell service
           </Link>
-          <Link href="/#contact" className="h-urgent-link">
+          <Link href="/?service=php2shell-emergency-patch#contact" className="h-urgent-link">
             Get help now →
           </Link>
         </div>

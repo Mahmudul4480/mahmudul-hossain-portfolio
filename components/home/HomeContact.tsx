@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { sectionImages } from "@/data/section-images";
 import { siteConfig } from "@/data/site";
+import ContactForm from "@/components/home/ContactForm";
 
 export default function HomeContact() {
   const year = new Date().getFullYear();
@@ -22,8 +23,9 @@ export default function HomeContact() {
       </h2>
       <p className="h-center-copy h-on-dark">
         I&apos;d be glad to hop on a quick 10-minute call to discuss your current project
-        architecture and timeline.
+        architecture and timeline. Or send a quote request below.
       </p>
+      <ContactForm />
       <div className="h-contact-ctas">
         <a
           className="btn btn-primary"
