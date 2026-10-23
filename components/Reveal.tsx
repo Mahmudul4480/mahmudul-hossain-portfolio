@@ -29,7 +29,7 @@ export default function Reveal({ children, className = "" }: RevealProps) {
           }
         });
       },
-      { threshold: 0.12 },
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
     );
 
     io.observe(el);
