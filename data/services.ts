@@ -1,5 +1,15 @@
 export type ServiceIconName =
-  "Megaphone" | "Target" | "Search" | "Palette" | "Layout" | "Monitor" | "Globe";
+  "Megaphone" | "Target" | "Search" | "Palette" | "Layout" | "Monitor" | "Globe" | "ShieldAlert";
+
+export interface ServiceSection {
+  heading: string;
+  paragraphs: string[];
+}
+
+export interface ServiceSource {
+  label: string;
+  href: string;
+}
 
 export interface ServiceProcessStep {
   step: string;
@@ -27,9 +37,98 @@ export interface Service {
   faqs: ServiceFaq[];
   relatedProjectSlugs: string[];
   featured?: boolean;
+  /** Optional long-form explainer sections rendered above "What's included". */
+  sections?: ServiceSection[];
+  sources?: ServiceSource[];
+  ctaHref?: string;
+  ctaLabel?: string;
+  eyebrow?: string;
+  heroImage?: { src: string; alt: string; width: number; height: number; chip?: string };
 }
 
 export const services: Service[] = [
+  {
+    slug: "php2shell-emergency-patch",
+    name: "PHP2Shell Emergency Patch & Security Audit",
+    eyebrow: "PHP2Shell · CVE-2026-109618 & CVE-2026-109619",
+    shortDescription:
+      "Patch PHP2Shell on your WordPress, WooCommerce, Laravel or custom PHP site: PHP upgrade, compromise check, hardening and a plain-English report.",
+    icon: "ShieldAlert",
+    heroHeadline: "PHP2Shell emergency patch & security audit for your website",
+    metaTitle: "PHP2Shell Fix & Emergency PHP Patch Service (CVE-2026-109618)",
+    metaDescription:
+      "Need to fix PHP2Shell (CVE-2026-109618 / CVE-2026-109619)? Mahmudul Hossain patches PHP, checks WordPress & PHP sites for compromise and hardens them. US, UK, EU & Canada.",
+    ctaHref: "/?service=php2shell-emergency-patch#contact",
+    heroImage: {
+      src: "/assets/mahmudul-security.webp",
+      alt: "Mahmudul Hossain, PHP security engineer",
+      width: 800,
+      height: 880,
+      chip: "I patch it myself, no outsourcing",
+    },
+    ctaLabel: "Book a PHP2Shell patch",
+    sections: [
+      {
+        heading: "What is PHP2Shell?",
+        paragraphs: [
+          "PHP2Shell is the name for two critical vulnerabilities in the PHP engine itself, CVE-2026-109618 and CVE-2026-109619, disclosed by the PHP project on 21 October 2026. CISA and the PHP project describe them as allowing unauthenticated remote code execution: a crafted HTTP request can be enough to run code on the server, without any login.",
+          "Because the flaw is in PHP rather than in a plugin or theme, updating WordPress, WooCommerce or your plugins does not fix it. Datadog Security Labs found the malicious request is processed before application code runs, so security plugins and login screens cannot block it. Public exploits are available and exploitation attempts have been reported.",
+        ],
+      },
+      {
+        heading: "Is my site vulnerable to PHP2Shell?",
+        paragraphs: [
+          "If your site runs PHP and serves web requests through PHP-FPM, Apache mod_php, php-cgi, FrankenPHP or LiteSpeed, assume it is in scope until proven otherwise. Vercel's bulletin notes PHP 5.4 and later are affected in default configurations, including WordPress, Drupal, Laravel and Magento sites.",
+          "The fixed releases are PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35. PHP 8.1 and older are end-of-life and only have minimal source backports, so most sites on those versions need to move to a supported branch. In WordPress, check Tools → Site Health → Info → Server; on shared hosting such as Hostinger, cPanel or Plesk, confirm with your host that the build serving your domain includes the fix.",
+        ],
+      },
+    ],
+    sources: [
+      { label: "PHP 8 ChangeLog (php.net)", href: "https://www.php.net/ChangeLog-8.php" },
+      {
+        label: "CISA alert: critical PHP vulnerabilities",
+        href: "https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching",
+      },
+      {
+        label: "Datadog Security Labs: PHP2Shell analysis",
+        href: "https://securitylabs.datadoghq.com/articles/php2shell-critical-vulnerabilities-in-php/",
+      },
+      { label: "Vercel PHP2Shell security bulletin", href: "https://vercel.com/kb/bulletin/php2shell-security-bulletin" },
+      { label: "Wiz Research: PHP2Shell", href: "https://www.wiz.io/blog/php2shell-php-rce" },
+    ],
+    whatIsIncluded: [
+      "Exposure check: which PHP version and SAPI actually serve each of your domains (not just php -v)",
+      "PHP upgrade to a patched release (8.2.35, 8.3.36, 8.4.27, 8.5.12 or newer) and worker restart, or a planned move off PHP 8.1 and older",
+      "Compatibility testing of theme, plugins, checkout, forms and key pages before and after the switch",
+      "Compromise check: malware/file scan, recently changed PHP files, rogue admin accounts, cron jobs and log review",
+      "Temporary WAF rules or maintenance mode if an immediate upgrade is not possible",
+      "Hardening: unused plugins removed, file permissions, config files, credential rotation advice",
+      "Short plain-English report of what was found, what changed and what to do next",
+    ],
+    process: [
+      { step: "01", title: "Triage", description: "You send the site URL and hosting access. I confirm the PHP version serving the site and how exposed it is." },
+      { step: "02", title: "Backup & patch", description: "Full backup, then PHP is upgraded to a patched release on staging or in a short maintenance window, and workers are restarted." },
+      { step: "03", title: "Test & scan", description: "I test the site end to end and check files, users, cron jobs and logs for signs of compromise." },
+      { step: "04", title: "Harden & report", description: "Hardening changes are applied and you get a written report you can share with your team, clients or insurer." },
+    ],
+    idealFor: [
+      "WordPress and WooCommerce site owners in the US, UK, EU and Canada",
+      "Sites on shared or managed hosting (Hostinger, cPanel, Plesk) and VPS servers",
+      "Laravel, Drupal, Magento and custom PHP applications",
+      "Agencies with many client sites on one or more hosting accounts",
+    ],
+    startingPrice: "Custom quote",
+    faqs: [
+      { question: "How do I fix PHP2Shell?", answer: "Update the PHP runtime serving your site to 8.2.35, 8.3.36, 8.4.27, 8.5.12 or later (or a vendor backport), restart PHP-FPM or the web server, then check the site for signs of compromise. Updating WordPress or plugins alone does not fix it." },
+      { question: "Is my WordPress site affected by PHP2Shell?", answer: "Very likely, unless your host has already patched PHP. WordPress runs on PHP and PHP2Shell is in the PHP engine. Check Tools → Site Health → Info → Server for the PHP version and compare it with the fixed releases." },
+      { question: "Which PHP versions are vulnerable to PHP2Shell?", answer: "Per public advisories, PHP 5.4 and later are affected in default configurations. Fixed upstream releases are 8.2.35, 8.3.36, 8.4.27 and 8.5.12. PHP 8.1 and older are end-of-life and need a vendor backport or an upgrade." },
+      { question: "Does a firewall or security plugin protect me?", answer: "Not fully. A WAF can block known exploit patterns for a while, but the attack happens before WordPress code runs, and patching PHP is the only permanent fix." },
+      { question: "I'm on Hostinger or other shared hosting. What should I do?", answer: "Select a supported PHP branch in your hosting panel and ask your host to confirm their build includes the CVE-2026-109618 and CVE-2026-109619 fixes. I can handle this and the compromise check for you." },
+      { question: "How much does a PHP2Shell patch cost?", answer: "It depends on the number of sites and how they are hosted. Send me your site list through the contact form and I'll reply with a clear scope and quote." },
+    ],
+    relatedProjectSlugs: [],
+    featured: true,
+  },
   {
     slug: "digital-marketing",
     name: "Digital Marketing",

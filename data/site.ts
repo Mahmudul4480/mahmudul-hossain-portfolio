@@ -19,6 +19,7 @@ export const siteConfig = {
   navLinks: [
     { label: "Work", href: "/#work" },
     { label: "Services", href: "/services" },
+    { label: "PHP2Shell Fix", href: "/services/php2shell-emergency-patch" },
     { label: "Blog", href: "/blog" },
     { label: "Capabilities", href: "/#stack" },
     { label: "Workflow", href: "/#workflow" },

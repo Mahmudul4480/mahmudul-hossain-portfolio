@@ -1,10 +1,10 @@
 ---
-title: "PHP2Shell: Emergency PHP Patch & Security Audit for Your Website"
+title: "PHP2Shell (CVE-2026-109618): How to Check and Fix Your PHP Version"
 slug: php2shell-emergency-patch-security-audit
-excerpt: "PHP2Shell lets attackers run code on unpatched PHP servers without logging in. Here's how to check your PHP version, patch safely and audit your site, or let me do it for you."
+excerpt: "How to fix PHP2Shell (CVE-2026-109618 & CVE-2026-109619): check if your WordPress or PHP site is vulnerable, update to a patched PHP version, and audit for compromise, or let me patch it for you."
 coverImage: /assets/php2shell-emergency-patch-security-audit.png
 publishedAt: "2026-10-23T09:00:00.000Z"
-updatedAt: "2026-10-23T09:00:00.000Z"
+updatedAt: "2026-10-23T13:00:00.000Z"
 tags:
   - Security
   - PHP
@@ -12,7 +12,7 @@ tags:
   - Services
 ---
 
-On 21 October 2026, the PHP project shipped emergency fixes for **PHP2Shell**, two critical flaws in the PHP engine itself. If your website runs on WordPress, WooCommerce, Laravel, Drupal or any custom PHP code, PHP2Shell is your problem too, even if your own code is perfectly clean. This post explains what happened in plain language, how to check whether you're exposed, what to do today, and how I can patch and audit your site for you.
+Need to fix **PHP2Shell (CVE-2026-109618)**? On 21 October 2026, the PHP project shipped emergency fixes for PHP2Shell, two critical flaws in the PHP engine itself. If your website runs on WordPress, WooCommerce, Laravel, Drupal or any custom PHP code, PHP2Shell is your problem too, even if your own code is perfectly clean. This post explains what happened in plain language, how to check whether you're exposed, what to do today, and how I can patch and audit your site for you through my [PHP2Shell emergency patch service](/services/php2shell-emergency-patch).
 
 ## What happened with PHP2Shell, in plain language
 
@@ -43,7 +43,7 @@ You are in scope if you run:
 
 Small businesses in the US, Canada, the UK and Europe are the quiet majority here. They rarely have an in-house security team, and a compromised site can mean lost sales, a blacklisted domain and, under GDPR or similar laws, a duty to report a data breach.
 
-## How to check your PHP version
+## Is my site vulnerable to PHP2Shell? How to check your PHP version
 
 Before you can fix anything, you need to know what you're running. Pick whichever method suits you:
 
@@ -52,11 +52,11 @@ Before you can fix anything, you need to know what you're running. Pick whicheve
 3. **Command line.** On a VPS, run `php -v`. Remember that the PHP-FPM version serving your site can differ from the CLI version, so check your web server's PHP pool too.
 4. **Ask your host.** Managed and shared hosts often patch the PHP builds on their servers themselves, so ask whether their PHP packages already include the PHP2Shell fixes.
 
-## What to do now: your PHP2Shell checklist
+## How to fix PHP2Shell: your patch checklist
 
 ### 1. Update PHP to a patched version
 
-The fixed releases are **PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35**, as listed in the [official PHP 8 ChangeLog](https://www.php.net/ChangeLog-8.php). If you're on one of those branches, update to the patched release and **restart PHP-FPM or your web server** so the old worker processes stop running vulnerable code.
+The fixed releases are **PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35**, as listed in the [official PHP 8 ChangeLog](https://www.php.net/ChangeLog-8.php) and the [Vercel PHP2Shell security bulletin](https://vercel.com/kb/bulletin/php2shell-security-bulletin). If you're on one of those branches, update to the patched release and **restart PHP-FPM or your web server** so the old worker processes stop running vulnerable code.
 
 ### 2. Move off end-of-life PHP (8.1 and older)
 
@@ -64,7 +64,7 @@ PHP 8.1 and older no longer receive regular updates from the PHP project. The PH
 
 ### 3. Confirm your host's patch status
 
-If you're on shared or managed hosting, check your provider's status page or support channel. Choosing "8.3" in a panel only helps if the host has installed 8.3.36 behind it.
+If you're on shared or managed hosting (Hostinger, SiteGround, Bluehost, cPanel or Plesk hosts), check your provider's status page or support channel and ask them to confirm their PHP build includes the fixes for CVE-2026-109618 and CVE-2026-109619. Choosing "8.3" in a panel only helps if the host has installed 8.3.36 behind it.
 
 ### 4. If you can't patch yet, take the site offline
 
@@ -95,13 +95,17 @@ If that checklist feels like a lot on top of running a business, you don't have 
 
 This is a natural extension of how I already work. I build and maintain production web apps with careful access control. You can see that approach in my post on [why row-level security matters for multi-tenant apps](/blog/why-row-level-security-multi-tenant) and in the [security guard management software case study](/blog/security-guard-management-software). Agencies with several client sites are welcome too, and I can work through a whole hosting account systematically.
 
-**Don't wait for the next scan to find your site.** [Get in touch to book a PHP2Shell patch and security audit](/#contact), or browse [my web development and hosting services](/services) to see how else I can help.
+**Don't wait for the next scan to find your site.** See the [PHP2Shell emergency patch & security audit service](/services/php2shell-emergency-patch) or [get in touch to book a patch](/?service=php2shell-emergency-patch#contact), or browse [my web development and hosting services](/services) to see how else I can help.
 
 ## Frequently asked questions
 
 ### Is my WordPress site affected by PHP2Shell?
 
 Very likely, unless your host has already patched it. WordPress runs on PHP, and PHP2Shell sits in the PHP engine, not in WordPress itself. Updating WordPress core or your plugins does not fix it. The PHP version on your server has to be updated.
+
+### How do I fix PHP2Shell?
+
+Update the PHP runtime serving your site to a patched release, restart PHP-FPM or your web server, then check for signs of compromise. Updating WordPress or plugins alone does not fix it. If you'd rather not do it yourself, my [PHP2Shell patch service](/services/php2shell-emergency-patch) covers it end to end.
 
 ### Which PHP versions fix PHP2Shell?
 
@@ -110,6 +114,10 @@ PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35. PHP 8.1 and older are end-of-life. Use a 
 ### Will updating my PHP version break my website?
 
 It can, mainly on older themes and plugins when you jump across major branches. Staying on the same branch, for example 8.3.x to 8.3.36, is usually low-risk. That's why compatibility testing is part of my service.
+
+### I'm on Hostinger or shared hosting. Am I patched?
+
+Only if your host has installed the patched PHP build behind the version you select. In hPanel or cPanel, pick a supported branch (8.2 or newer), then confirm with support that the build includes the CVE-2026-109618 and CVE-2026-109619 fixes, and recheck Site Health.
 
 ### Does a security plugin or firewall protect me?
 
@@ -121,4 +129,4 @@ Yes, if your site was exposed before you patched. Exploitation attempts were rep
 
 ### Can you help agencies with many sites?
 
-Yes. I can inventory every PHP site on your hosting accounts, prioritise the most exposed ones and patch and check them in a planned order. [Contact me](/#contact) with a rough list of your sites to get started.
+Yes. I can inventory every PHP site on your hosting accounts, prioritise the most exposed ones and patch and check them in a planned order. [Contact me](/?service=php2shell-emergency-patch#contact) with a rough list of your sites to get started.

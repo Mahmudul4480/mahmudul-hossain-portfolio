@@ -14,6 +14,7 @@ import HomeNav from "@/components/home/HomeNav";
 import HomeProjects from "@/components/home/HomeProjects";
 import HomeServices from "@/components/home/HomeServices";
 import HomeSkills from "@/components/home/HomeSkills";
+import HomeUrgent from "@/components/home/HomeUrgent";
 import SquareWipe from "@/components/home/SquareWipe";
 
 const script = Caveat({
@@ -36,6 +37,7 @@ export default function HomePage() {
         <HomeHero />
         <HomeIntro />
         <HomeAbout />
+        <HomeUrgent />
         <HomeServices />
         <SquareWipe kicker="The stack" />
         <HomeSkills />

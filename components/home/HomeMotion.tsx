@@ -154,8 +154,23 @@ export default function HomeMotion() {
       });
 
       revert = () => ctx.revert();
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-      document.fonts?.ready.then(() => ScrollTrigger.refresh()).catch(() => undefined);
+      // Pinned sections add spacer height after the browser has already jumped to
+      // the URL hash, so re-scroll to the hash target once layout is final.
+      const scrollToHash = () => {
+        const id = decodeURIComponent(window.location.hash.slice(1));
+        const target = id ? document.getElementById(id) : null;
+        if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: "auto" });
+      };
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+        scrollToHash();
+      });
+      document.fonts?.ready
+        .then(() => {
+          ScrollTrigger.refresh();
+          scrollToHash();
+        })
+        .catch(() => undefined);
     }
 
     setup();
