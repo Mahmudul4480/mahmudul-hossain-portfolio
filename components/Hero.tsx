@@ -11,6 +11,7 @@ export default function Hero() {
         <div>
           <p className="eyebrow">{siteConfig.tagline}</p>
           <h1>
+            <span className="h1-name">Mahmudul Hossain</span>
             I build secure, multi-tenant SaaS platforms — and I write{" "}
             <span className="hl">every</span> line myself.
           </h1>
