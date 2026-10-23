@@ -24,7 +24,7 @@ export default function JsonLd() {
         email: siteConfig.email,
         telephone: telephone(),
         image: `${siteConfig.url}/opengraph-image`,
-        sameAs: [siteConfig.socials.github, siteConfig.socials.linkedin],
+        sameAs: [siteConfig.socials.github, siteConfig.socials.linkedin, siteConfig.socials.x],
         knowsAbout: siteConfig.knowsAbout,
       },
       {
@@ -47,7 +47,7 @@ export default function JsonLd() {
         telephone: telephone(),
         description: siteConfig.description,
         founder: { "@id": personId },
-        sameAs: [siteConfig.socials.github, siteConfig.socials.linkedin],
+        sameAs: [siteConfig.socials.github, siteConfig.socials.linkedin, siteConfig.socials.x],
         areaServed: "Worldwide",
         serviceType: [
           "Full-Stack Development",

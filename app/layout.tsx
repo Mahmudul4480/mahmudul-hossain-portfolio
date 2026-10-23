@@ -49,6 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@Mahmudul4480",
+    creator: "@Mahmudul4480",
     title: defaultTitle,
     description: siteConfig.description,
   },
