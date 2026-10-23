@@ -7,9 +7,18 @@ import "./globals.css";
 const siteUrl = siteConfig.url;
 const defaultTitle = siteConfig.seoTitle;
 
-const googleVerification =
-  process.env.GOOGLE_SITE_VERIFICATION ?? "8cO67QbCqHube5qUnPp7F1lYB20GSPndA2EB04PBVr8";
-const bingVerification = process.env.BING_SITE_VERIFICATION;
+// The env var may hold the full <meta> tag pasted from Search Console; keep only the token.
+function verificationToken(raw: string | undefined, fallback?: string) {
+  if (!raw) return fallback;
+  const match = raw.match(/content=["']([^"']+)["']/);
+  return (match ? match[1] : raw).trim() || fallback;
+}
+
+const googleVerification = verificationToken(
+  process.env.GOOGLE_SITE_VERIFICATION,
+  "8cO67QbCqHube5qUnPp7F1lYB20GSPndA2EB04PBVr8",
+);
+const bingVerification = verificationToken(process.env.BING_SITE_VERIFICATION);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
