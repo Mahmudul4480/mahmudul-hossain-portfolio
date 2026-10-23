@@ -1,9 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomeUrgent() {
   return (
     <section className="h-urgent" id="php2shell" data-tone="dark" aria-labelledby="h-urgent-title">
       <div className="h-urgent-inner">
+        <div className="h-urgent-text">
         <p className="h-urgent-tag">
           <span className="h-urgent-dot" aria-hidden="true" /> Security advisory · 21 Oct 2026
         </p>
@@ -23,6 +25,18 @@ export default function HomeUrgent() {
           <Link href="/?service=php2shell-emergency-patch#contact" className="h-urgent-link">
             Get help now →
           </Link>
+        </div>
+        </div>
+        <div className="h-urgent-portrait">
+          <span className="h-urgent-glow" aria-hidden="true" />
+          <Image
+            src="/assets/mahmudul-cutout.webp"
+            alt="Mahmudul Hossain, PHP security engineer"
+            width={720}
+            height={744}
+            sizes="(max-width: 860px) 220px, 380px"
+          />
+          <span className="h-urgent-chip">I patch it myself, no outsourcing</span>
         </div>
       </div>
     </section>

@@ -2967,3 +2967,10 @@ nav.wrap {
 .service-explainer p { line-height: 1.7; }
 .service-sources { padding-left: 1.2rem; margin-bottom: 1.5rem; }
 .service-sources a { text-decoration: underline; }
+
+.service-hero-portrait { position: relative; display: flex; justify-content: center; align-items: flex-end; }
+.service-hero-portrait img { position: relative; z-index: 1; width: min(100%, 380px); height: auto; }
+.service-hero-glow { position: absolute; inset: 10% 0 0; border-radius: 50%; filter: blur(28px);
+  background: radial-gradient(circle at 40% 45%, rgba(242,169,59,.45), transparent 60%), radial-gradient(circle at 65% 60%, rgba(94,234,212,.35), transparent 62%); }
+.service-hero-chip { position: absolute; z-index: 2; left: 0; bottom: 12%; background: rgba(9,13,22,.85); color: #f6f3ec; border: 1px solid rgba(94,234,212,.5); padding: .45rem .8rem; border-radius: 999px; font-size: .82rem; }
+@media (max-width: 860px) { .service-hero-portrait img { width: 220px; } .service-hero-chip { left: 50%; transform: translateX(-50%); white-space: nowrap; } }

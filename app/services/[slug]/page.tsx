@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
@@ -145,9 +146,26 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
                   </Link>
                 </div>
               </div>
-              <div className="service-hero-icon-panel" aria-hidden="true">
-                <ServiceIcon name={service.icon} className="service-hero-icon" />
-              </div>
+              {service.heroImage ? (
+                <div className="service-hero-portrait">
+                  <span className="service-hero-glow" aria-hidden="true" />
+                  <Image
+                    src={service.heroImage.src}
+                    alt={service.heroImage.alt}
+                    width={service.heroImage.width}
+                    height={service.heroImage.height}
+                    sizes="(max-width: 860px) 220px, 380px"
+                    priority
+                  />
+                  {service.heroImage.chip ? (
+                    <span className="service-hero-chip">{service.heroImage.chip}</span>
+                  ) : null}
+                </div>
+              ) : (
+                <div className="service-hero-icon-panel" aria-hidden="true">
+                  <ServiceIcon name={service.icon} className="service-hero-icon" />
+                </div>
+              )}
             </Reveal>
           </div>
         </section>

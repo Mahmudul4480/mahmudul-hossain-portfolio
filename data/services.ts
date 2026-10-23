@@ -43,6 +43,7 @@ export interface Service {
   ctaHref?: string;
   ctaLabel?: string;
   eyebrow?: string;
+  heroImage?: { src: string; alt: string; width: number; height: number; chip?: string };
 }
 
 export const services: Service[] = [
@@ -58,6 +59,13 @@ export const services: Service[] = [
     metaDescription:
       "Need to fix PHP2Shell (CVE-2026-109618 / CVE-2026-109619)? Mahmudul Hossain patches PHP, checks WordPress & PHP sites for compromise and hardens them. US, UK, EU & Canada.",
     ctaHref: "/?service=php2shell-emergency-patch#contact",
+    heroImage: {
+      src: "/assets/mahmudul-cutout.webp",
+      alt: "Mahmudul Hossain, PHP security engineer",
+      width: 720,
+      height: 744,
+      chip: "I patch it myself, no outsourcing",
+    },
     ctaLabel: "Book a PHP2Shell patch",
     sections: [
       {
