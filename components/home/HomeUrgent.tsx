@@ -30,10 +30,10 @@ export default function HomeUrgent() {
         <div className="h-urgent-portrait">
           <span className="h-urgent-glow" aria-hidden="true" />
           <Image
-            src="/assets/mahmudul-cutout.webp"
+            src="/assets/mahmudul-security.webp"
             alt="Mahmudul Hossain, PHP security engineer"
-            width={720}
-            height={744}
+            width={800}
+            height={880}
             sizes="(max-width: 860px) 220px, 380px"
           />
           <span className="h-urgent-chip">I patch it myself, no outsourcing</span>

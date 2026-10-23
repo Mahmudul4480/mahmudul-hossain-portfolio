@@ -60,10 +60,10 @@ export const services: Service[] = [
       "Need to fix PHP2Shell (CVE-2026-109618 / CVE-2026-109619)? Mahmudul Hossain patches PHP, checks WordPress & PHP sites for compromise and hardens them. US, UK, EU & Canada.",
     ctaHref: "/?service=php2shell-emergency-patch#contact",
     heroImage: {
-      src: "/assets/mahmudul-cutout.webp",
+      src: "/assets/mahmudul-security.webp",
       alt: "Mahmudul Hossain, PHP security engineer",
-      width: 720,
-      height: 744,
+      width: 800,
+      height: 880,
       chip: "I patch it myself, no outsourcing",
     },
     ctaLabel: "Book a PHP2Shell patch",
