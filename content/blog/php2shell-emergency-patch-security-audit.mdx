@@ -1,0 +1,122 @@
+---
+title: "PHP2Shell: Emergency PHP Patch & Security Audit for Your Website"
+slug: php2shell-emergency-patch-security-audit
+excerpt: "PHP2Shell lets attackers run code on unpatched PHP servers without logging in. Here's how to check your PHP version, patch safely and audit your site, or let me do it for you."
+coverImage: /assets/php2shell-emergency-patch-security-audit.png
+publishedAt: "2026-10-23T09:00:00.000Z"
+updatedAt: "2026-10-23T09:00:00.000Z"
+tags:
+  - Security
+  - PHP
+  - WordPress
+  - Services
+---
+
+On 21 October 2026, the PHP project shipped emergency fixes for **PHP2Shell**, two critical flaws in the PHP engine itself. If your website runs on WordPress, WooCommerce, Laravel, Drupal or any custom PHP code, PHP2Shell is your problem too, even if your own code is perfectly clean. This post explains what happened in plain language, how to check whether you're exposed, what to do today, and how I can patch and audit your site for you.
+
+## What happened with PHP2Shell, in plain language
+
+PHP2Shell is the nickname for two vulnerabilities, **CVE-2026-109618** and **CVE-2026-109619**. Each carries a CVSS v4.0 score of **9.2 out of 10**. According to [CISA's alert on the critical PHP vulnerabilities](https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching), they allow **unauthenticated remote code execution**. In other words, an attacker doesn't need a password or an account. A crafted web request can be enough to run commands on your server.
+
+What makes this one different is *where* the bug lives. It isn't in a plugin or a theme. It's in PHP's core memory handling. [Datadog Security Labs' technical analysis](https://securitylabs.datadoghq.com/articles/php2shell-critical-vulnerabilities-in-php/) reproduced the attack and found that the malicious request is processed before any application code runs, so your login screen, security plugin or application-level authentication cannot block it.
+
+Once inside, an attacker runs with the web server's privileges. That can mean stolen files and database contents, defaced pages, hidden backdoors or spam and malware pushed to your visitors. The [Wiz Research write-up on PHP2Shell](https://www.wiz.io/blog/php2shell-php-rce) adds that some of the issues can also leak process memory, which may contain passwords, session tokens and API keys.
+
+A few more PHP2Shell facts worth knowing:
+
+- **The range is huge.** Wiz reports that every PHP release from the last decade, back to PHP 5.4, is affected by at least one of the issues.
+- **Attacks started early.** Datadog notes that AWS reported exploitation attempts as early as 17 October, four days before public disclosure, and the [Cyber Security Agency of Singapore](https://www.csa.gov.sg/alerts-and-advisories/alerts/al-2026-151/) reports widespread exploitation attempts and multiple public proof-of-concept exploits.
+- **Europe went dark as a precaution.** As [The Next Web reported](https://thenextweb.com/news/europe-governments-websites-offline-php-security-flaws), government, hospital, university and port websites across Europe, including the Port of Rotterdam, were taken offline while teams patched. The UK's NCSC told owners to update or take systems offline.
+- **AI played a part.** The [Google Cloud blog on responding to PHP2Shell](https://cloud.google.com/blog/products/identity-security/responding-to-core-php-vulnerabilities-cve-2026-109618-cve-2026-109619) says Gemini 4 Argon helped find the vulnerability, develop the exploit, detect attacks and validate the patch. That cuts both ways: the same kind of tooling makes it faster for attackers to weaponise flaws at scale.
+
+## Who is affected?
+
+Short answer: PHP2Shell can reach almost anyone running PHP that serves web requests. [BleepingComputer's coverage of the emergency patches](https://www.bleepingcomputer.com/news/security/php-ships-emergency-patches-for-critical-php2shell-flaws/) lists PHP-FPM, Apache with mod_php, php-cgi, FrankenPHP and LiteSpeed. That covers the setups used by most shared hosts, managed WordPress hosts and VPS deployments.
+
+You are in scope if you run:
+
+- A **WordPress** blog, brochure site or membership site. WordPress is written in PHP.
+- A **WooCommerce** store, where customer data and order history sit on the same server.
+- A **Laravel**, Symfony or CodeIgniter application, or a custom PHP back end.
+- A Joomla, Drupal or Magento site, a client portal, a booking system or an old PHP tool nobody has touched in years.
+- An **agency** portfolio of client sites on one or more hosting accounts.
+
+Small businesses in the US, Canada, the UK and Europe are the quiet majority here. They rarely have an in-house security team, and a compromised site can mean lost sales, a blacklisted domain and, under GDPR or similar laws, a duty to report a data breach.
+
+## How to check your PHP version
+
+Before you can fix anything, you need to know what you're running. Pick whichever method suits you:
+
+1. **Hosting control panel.** In hPanel, cPanel, Plesk and most managed hosts, the PHP version is shown under a "PHP Configuration", "Select PHP Version" or "MultiPHP Manager" section.
+2. **WordPress dashboard.** Go to **Tools → Site Health → Info → Server**. The PHP version is listed there.
+3. **Command line.** On a VPS, run `php -v`. Remember that the PHP-FPM version serving your site can differ from the CLI version, so check your web server's PHP pool too.
+4. **Ask your host.** Managed and shared hosts often patch the PHP builds on their servers themselves, so ask whether their PHP packages already include the PHP2Shell fixes.
+
+## What to do now: your PHP2Shell checklist
+
+### 1. Update PHP to a patched version
+
+The fixed releases are **PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35**, as listed in the [official PHP 8 ChangeLog](https://www.php.net/ChangeLog-8.php). If you're on one of those branches, update to the patched release and **restart PHP-FPM or your web server** so the old worker processes stop running vulnerable code.
+
+### 2. Move off end-of-life PHP (8.1 and older)
+
+PHP 8.1 and older no longer receive regular updates from the PHP project. The PHP security team published minimal source backports for 7.4, 8.0 and 8.1, and some Linux distributions and LTS vendors ship their own fixes. For most website owners on shared or managed hosting, the realistic route is to **update PHP version** to 8.2 or newer. Test before you switch, though. Older themes and plugins can break on newer PHP, so test on a staging copy, or at least take a full backup first.
+
+### 3. Confirm your host's patch status
+
+If you're on shared or managed hosting, check your provider's status page or support channel. Choosing "8.3" in a panel only helps if the host has installed 8.3.36 behind it.
+
+### 4. If you can't patch yet, take the site offline
+
+This is exactly what CISA and the UK NCSC advise for systems that can't be updated right away. A few hours of maintenance mode is far cheaper than a breach. A web application firewall, such as Cloudflare's emergency rules, can buy time, but it is a stopgap, not a fix.
+
+### 5. Check whether you've already been hit
+
+Patching PHP2Shell closes the door. It doesn't remove anyone who walked in before you closed it. After you update, look for:
+
+- **New or modified PHP files** you didn't create, especially in `wp-content/uploads`, theme folders and the web root.
+- **Unknown administrator accounts** in WordPress or your application.
+- **Odd log entries**: unusual POST requests, PHP workers starting shell commands or downloading tools, and traffic spikes on non-standard ports.
+- **Unexpected cron jobs**, redirects, injected scripts or new outbound connections.
+
+If you find anything, rotate passwords, API keys and database credentials, because PHP2Shell's memory-disclosure side means secrets may have leaked.
+
+## My PHP2Shell Emergency Patch & Security Audit service
+
+If that checklist feels like a lot on top of running a business, you don't have to work through it alone. I'm offering a dedicated **PHP2Shell Emergency Patch & Security Audit** for WordPress, WooCommerce, Laravel and custom PHP websites. Here is what you get:
+
+- **PHP upgrade to a patched release.** I move your site to PHP 8.5.12, 8.4.27, 8.3.36 or 8.2.35, or to a supported branch if you're on 8.1 or older, and make sure the running workers are actually using the new version.
+- **Compatibility testing.** Before and after the switch, I test your theme, plugins, checkout, forms and key pages, so the upgrade fixes the hole without breaking revenue-critical features.
+- **Compromise check.** A file and malware scan, a review of recently changed files, an audit of admin and user accounts, and a look through server and access logs for signs of PHP2Shell exploitation.
+- **Hardening.** Removing unused plugins and stale accounts, tightening file permissions, securing configuration files and advising on firewall rules, so the next vulnerability has less to work with.
+- **A short, plain-English report.** What I found, what I changed and what I recommend next, written so you can share it with your team, your clients or your insurer.
+
+This is a natural extension of how I already work. I build and maintain production web apps with careful access control. You can see that approach in my post on [why row-level security matters for multi-tenant apps](/blog/why-row-level-security-multi-tenant) and in the [security guard management software case study](/blog/security-guard-management-software). Agencies with several client sites are welcome too, and I can work through a whole hosting account systematically.
+
+**Don't wait for the next scan to find your site.** [Get in touch to book a PHP2Shell patch and security audit](/#contact), or browse [my web development and hosting services](/services) to see how else I can help.
+
+## Frequently asked questions
+
+### Is my WordPress site affected by PHP2Shell?
+
+Very likely, unless your host has already patched it. WordPress runs on PHP, and PHP2Shell sits in the PHP engine, not in WordPress itself. Updating WordPress core or your plugins does not fix it. The PHP version on your server has to be updated.
+
+### Which PHP versions fix PHP2Shell?
+
+PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35. PHP 8.1 and older are end-of-life. Use a vendor backport if you have one, or upgrade to a supported branch.
+
+### Will updating my PHP version break my website?
+
+It can, mainly on older themes and plugins when you jump across major branches. Staying on the same branch, for example 8.3.x to 8.3.36, is usually low-risk. That's why compatibility testing is part of my service.
+
+### Does a security plugin or firewall protect me?
+
+Not fully. The attack happens before WordPress or your application code runs, so application-level plugins can't stop it. A WAF can block known exploit patterns for a while, but patching is the only permanent fix.
+
+### I've patched. Do I still need a WordPress security audit?
+
+Yes, if your site was exposed before you patched. Exploitation attempts were reported before disclosure, and a patch doesn't remove backdoors or rogue admin accounts. A **WordPress security audit** confirms you're clean.
+
+### Can you help agencies with many sites?
+
+Yes. I can inventory every PHP site on your hosting accounts, prioritise the most exposed ones and patch and check them in a planned order. [Contact me](/#contact) with a rough list of your sites to get started.
