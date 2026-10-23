@@ -2962,3 +2962,8 @@ nav.wrap {
 }
 
 .h1-name { display:block; font-size:0.38em; letter-spacing:0.02em; opacity:0.8; margin-bottom:0.4em; }
+
+.service-explainer { max-width: 75ch; margin-bottom: 2rem; }
+.service-explainer p { line-height: 1.7; }
+.service-sources { padding-left: 1.2rem; margin-bottom: 1.5rem; }
+.service-sources a { text-decoration: underline; }

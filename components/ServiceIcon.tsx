@@ -5,6 +5,7 @@ import {
   Monitor,
   Palette,
   Search,
+  ShieldAlert,
   Target,
   type LucideIcon,
 } from "lucide-react";
@@ -18,6 +19,7 @@ const iconMap: Record<ServiceIconName, LucideIcon> = {
   Layout,
   Monitor,
   Globe,
+  ShieldAlert,
 };
 
 interface ServiceIconProps {
