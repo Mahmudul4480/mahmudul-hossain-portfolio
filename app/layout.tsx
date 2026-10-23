@@ -5,7 +5,7 @@ import { fontVariables, inter, jetbrainsMono, spaceGrotesk } from "@/lib/fonts";
 import "./globals.css";
 
 const siteUrl = siteConfig.url;
-const defaultTitle = `${siteConfig.name} — ${siteConfig.title}`;
+const defaultTitle = siteConfig.seoTitle;
 
 const googleVerification =
   process.env.GOOGLE_SITE_VERIFICATION ?? "8cO67QbCqHube5qUnPp7F1lYB20GSPndA2EB04PBVr8";
