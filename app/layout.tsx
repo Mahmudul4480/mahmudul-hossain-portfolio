@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/data/site";
 import { fontVariables, inter, jetbrainsMono, spaceGrotesk } from "@/lib/fonts";
@@ -84,6 +85,9 @@ export const metadata: Metadata = {
     : {}),
 };
 
+const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-C8JB2JC41C";
+const isProd = process.env.NODE_ENV === "production";
+
 export const viewport: Viewport = {
   themeColor: siteConfig.themeColor,
   colorScheme: "dark",
@@ -97,6 +101,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
         <JsonLd />
         {children}
+        {isProd && gaId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );
