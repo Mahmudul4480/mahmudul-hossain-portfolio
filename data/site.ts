@@ -14,6 +14,7 @@ export const siteConfig = {
     github: "https://github.com/Mahmudul4480",
     linkedin: "https://www.linkedin.com/in/mahmudul-hossain/",
     x: "https://x.com/Mahmudul4480",
+    facebook: "https://www.facebook.com/mahmudul4480/",
   },
   navLinks: [
     { label: "Work", href: "/#work" },
