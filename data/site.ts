@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Full-Stack Engineer & SaaS Architect",
   tagline: "Full-stack engineer · SaaS architect · Solo, no agency",
   seoTitle: "Mahmudul Hossain — Full-Stack Web & App Developer",
-  alternateNames: ["Mahmudul", "Mahmudul4480", "মাহমুদুল হোসেন"],
+  alternateNames: ["Mahmudul", "Mahmudul4480", "মাহমুদুল হোসাইন"],
   description:
     "Mahmudul Hossain — independent full-stack engineer and SaaS architect specializing in Next.js, React, Node.js and secure multi-tenant database architecture. Solo developer. 100% technical ownership.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mahmudulhossain.com",
