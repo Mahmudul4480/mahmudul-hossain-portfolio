@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { BlogHeading } from "@/lib/blog-types";
 
 interface BlogTableOfContentsProps {
@@ -14,7 +13,7 @@ export default function BlogTableOfContents({ headings }: BlogTableOfContentsPro
       <ol>
         {headings.map((heading) => (
           <li key={heading.id} className={heading.level === 3 ? "blog-toc-h3" : undefined}>
-            <Link href={`#${heading.id}`}>{heading.text}</Link>
+            <a href={`#${heading.id}`}>{heading.text}</a>
           </li>
         ))}
       </ol>

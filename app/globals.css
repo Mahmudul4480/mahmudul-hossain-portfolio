@@ -2955,3 +2955,8 @@ nav.wrap {
 .admin-submit {
   width: 100%;
 }
+
+.blog-mdx h2[id],
+.blog-mdx h3[id] {
+  scroll-margin-top: 96px;
+}
