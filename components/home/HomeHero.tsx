@@ -7,6 +7,7 @@ export default function HomeHero() {
     <section className="h-hero" id="home" data-tone="dark">
       <p className="h-kicker">{siteConfig.tagline}</p>
       <h1>
+        <span className="h1-name">Mahmudul Hossain</span>
         <span className="h-line">Secure SaaS,</span>
         <span className="h-line">built so the</span>
         <span className="h-line">right clients</span>
