@@ -180,6 +180,11 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
                     {section.paragraphs.map((para) => (
                       <p key={para.slice(0, 40)}>{para}</p>
                     ))}
+                    {section.links?.map((l) => (
+                      <p key={l.href}>
+                        <Link href={l.href}>{l.label} →</Link>
+                      </p>
+                    ))}
                   </div>
                 ))}
                 {service.sources?.length ? (
