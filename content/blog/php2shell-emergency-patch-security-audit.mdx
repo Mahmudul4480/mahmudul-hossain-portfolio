@@ -4,7 +4,7 @@ slug: php2shell-emergency-patch-security-audit
 excerpt: "How to fix PHP2Shell (CVE-2026-109618 & CVE-2026-109619): check if your WordPress or PHP site is vulnerable, update to a patched PHP version, and audit for compromise, or let me patch it for you."
 coverImage: /assets/php2shell-emergency-patch-security-audit.png
 publishedAt: "2026-10-23T09:00:00.000Z"
-updatedAt: "2026-10-23T13:00:00.000Z"
+updatedAt: "2026-10-25T00:00:00.000Z"
 tags:
   - Security
   - PHP
@@ -43,7 +43,7 @@ You are in scope if you run:
 
 Small businesses in the US, Canada, the UK and Europe are the quiet majority here. They rarely have an in-house security team, and a compromised site can mean lost sales, a blacklisted domain and, under GDPR or similar laws, a duty to report a data breach.
 
-## Is my site vulnerable to PHP2Shell? How to check your PHP version
+## How to check if your website is vulnerable to PHP2Shell
 
 Before you can fix anything, you need to know what you're running. Pick whichever method suits you:
 
@@ -51,6 +51,8 @@ Before you can fix anything, you need to know what you're running. Pick whicheve
 2. **WordPress dashboard.** Go to **Tools → Site Health → Info → Server**. The PHP version is listed there.
 3. **Command line.** On a VPS, run `php -v`. Remember that the PHP-FPM version serving your site can differ from the CLI version, so check your web server's PHP pool too.
 4. **Ask your host.** Managed and shared hosts often patch the PHP builds on their servers themselves, so ask whether their PHP packages already include the PHP2Shell fixes.
+
+On **shared hosting (cPanel, Plesk or Hostinger)**, switching the PHP version in the panel is only half the job: the host's build must include the fix. My page on the [PHP2Shell patch for WordPress and shared hosting](/services/php2shell-emergency-patch) explains how I handle this for small business sites.
 
 ## How to fix PHP2Shell: your patch checklist
 
