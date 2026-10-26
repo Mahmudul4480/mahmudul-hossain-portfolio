@@ -4,6 +4,8 @@ export type ServiceIconName =
 export interface ServiceSection {
   heading: string;
   paragraphs: string[];
+  /** Optional descriptive internal/external links shown under the section. */
+  links?: { label: string; href: string }[];
 }
 
 export interface ServiceSource {
@@ -54,10 +56,10 @@ export const services: Service[] = [
     shortDescription:
       "Patch PHP2Shell on your WordPress, WooCommerce, Laravel or custom PHP site: PHP upgrade, compromise check, hardening and a plain-English report.",
     icon: "ShieldAlert",
-    heroHeadline: "PHP2Shell emergency patch & security audit for your website",
-    metaTitle: "PHP2Shell Fix & Emergency PHP Patch Service (CVE-2026-109618)",
+    heroHeadline: "PHP2Shell emergency patch service for small business websites",
+    metaTitle: "PHP2Shell Fix for WordPress & Shared Hosting | Emergency Patch Service",
     metaDescription:
-      "Need to fix PHP2Shell (CVE-2026-109618 / CVE-2026-109619)? Mahmudul Hossain patches PHP, checks WordPress & PHP sites for compromise and hardens them. US, UK, EU & Canada.",
+      "PHP2Shell emergency patch service for small businesses: I fix PHP2Shell (CVE-2026-109618) on WordPress, cPanel & Hostinger shared hosting, check for compromise. US, EU, Canada.",
     ctaHref: "/?service=php2shell-emergency-patch#contact",
     heroImage: {
       src: "/assets/mahmudul-security.webp",
@@ -76,10 +78,37 @@ export const services: Service[] = [
         ],
       },
       {
-        heading: "Is my site vulnerable to PHP2Shell?",
+        heading: "How to check if your website is vulnerable to PHP2Shell",
         paragraphs: [
           "If your site runs PHP and serves web requests through PHP-FPM, Apache mod_php, php-cgi, FrankenPHP or LiteSpeed, assume it is in scope until proven otherwise. Vercel's bulletin notes PHP 5.4 and later are affected in default configurations, including WordPress, Drupal, Laravel and Magento sites.",
           "The fixed releases are PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35. PHP 8.1 and older are end-of-life and only have minimal source backports, so most sites on those versions need to move to a supported branch. In WordPress, check Tools → Site Health → Info → Server; on shared hosting such as Hostinger, cPanel or Plesk, confirm with your host that the build serving your domain includes the fix.",
+        ],
+      },
+      {
+        heading: "PHP2Shell fix for WordPress sites",
+        paragraphs: [
+          "A PHP2Shell fix for WordPress is a server-side job: the PHP version that runs WordPress has to change, not WordPress itself. Updating core, themes or plugins is still good practice, but it does not close CVE-2026-109618 or CVE-2026-109619.",
+          "When I patch a WordPress or WooCommerce site, I take a full backup, switch the site to a patched PHP release, restart PHP workers, then test the theme, plugins, checkout and forms. After that I look for signs of compromise such as unknown admin users, recently modified PHP files in wp-content and unexpected cron jobs.",
+        ],
+        links: [
+          { label: "Step-by-step guide: how to check and fix your PHP version for PHP2Shell", href: "/blog/php2shell-emergency-patch-security-audit" },
+        ],
+      },
+      {
+        heading: "PHP2Shell patch on shared hosting (cPanel, Plesk, Hostinger)",
+        paragraphs: [
+          "On shared hosting you usually cannot install PHP yourself. The PHP builds are provided by the host, and you choose a version per domain in the control panel: MultiPHP Manager or Select PHP Version in cPanel, PHP Settings in Plesk, or the PHP configuration page in Hostinger hPanel.",
+          "Picking a newer branch in the panel only helps if the host's build of that branch includes the PHP2Shell fixes. I check the version actually serving each domain, ask the host to confirm the patched build where needed, and test the site after the switch so nothing breaks quietly.",
+        ],
+      },
+      {
+        heading: "Hire a developer to fix PHP2Shell",
+        paragraphs: [
+          "If you run a small business, agency or online shop in the US, UK, EU or Canada and don't have a developer on call, you can hire me to fix PHP2Shell for you. I do the work myself, explain each step in plain English and leave you with a short written report.",
+          "Every site is different, so pricing is a custom quote based on how many sites you have and how they are hosted.",
+        ],
+        links: [
+          { label: "Request a PHP2Shell emergency patch quote", href: "/?service=php2shell-emergency-patch#contact" },
         ],
       },
     ],
@@ -124,6 +153,9 @@ export const services: Service[] = [
       { question: "Which PHP versions are vulnerable to PHP2Shell?", answer: "Per public advisories, PHP 5.4 and later are affected in default configurations. Fixed upstream releases are 8.2.35, 8.3.36, 8.4.27 and 8.5.12. PHP 8.1 and older are end-of-life and need a vendor backport or an upgrade." },
       { question: "Does a firewall or security plugin protect me?", answer: "Not fully. A WAF can block known exploit patterns for a while, but the attack happens before WordPress code runs, and patching PHP is the only permanent fix." },
       { question: "I'm on Hostinger or other shared hosting. What should I do?", answer: "Select a supported PHP branch in your hosting panel and ask your host to confirm their build includes the CVE-2026-109618 and CVE-2026-109619 fixes. I can handle this and the compromise check for you." },
+      { question: "How do I check if my website is vulnerable to PHP2Shell?", answer: "Find the PHP version that actually serves your site (in WordPress: Tools → Site Health → Info → Server, or your hosting panel's PHP settings) and compare it with the fixed releases 8.2.35, 8.3.36, 8.4.27 and 8.5.12. Anything older, including PHP 8.1 and below, should be treated as vulnerable until your host confirms a backported fix." },
+      { question: "Can you fix PHP2Shell on cPanel or Hostinger shared hosting?", answer: "Yes. On shared hosting the fix is done through the hosting panel and, when needed, by confirming with the host that their PHP build is patched. I switch the version, test the site and check it for signs of compromise." },
+      { question: "Can I hire you to fix PHP2Shell for my small business website?", answer: "Yes. Send your site URL through the contact form and I'll reply with a scope and a custom quote. I work with small businesses and agencies in the US, UK, EU and Canada." },
       { question: "How much does a PHP2Shell patch cost?", answer: "It depends on the number of sites and how they are hosted. Send me your site list through the contact form and I'll reply with a clear scope and quote." },
     ],
     relatedProjectSlugs: [],
