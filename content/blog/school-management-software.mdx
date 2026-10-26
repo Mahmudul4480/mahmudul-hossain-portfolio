@@ -1,0 +1,102 @@
+---
+title: "School Management Software: Admissions, Fees & Accounts in One Place"
+slug: school-management-software
+excerpt: "How school management software can replace scattered spreadsheets with one system for admissions, fee invoices, cash books, stock, staff and a parent portal."
+coverImage: /assets/school-management-software.png
+publishedAt: "2026-10-26T09:00:00.000Z"
+updatedAt: "2026-10-26T09:00:00.000Z"
+tags:
+  - Case Study
+  - Education
+  - React
+  - Firebase
+---
+
+It's the first week of term. A parent is at the front desk asking why their receipt shows the wrong amount, the accounts clerk is hunting through three spreadsheets for last month's tuition payments, and the principal is waiting on a cash report that nobody has had time to finish. Schools don't fail at admin because people are careless. They fail because the tools were never joined up. That's the problem I set out to fix when I built **school management software** for An-Noor International School, and in this post I'll walk you through what it does and what a school like yours could gain from it.
+
+## Where school admin quietly loses time and money
+
+Whether you run an independent school in the UK, a private academy in the US or a faith school in Canada, the pain points that send schools looking for school management software tend to look the same:
+
+- **Admissions on paper.** Forms, fee calculations and discounts are worked out by hand, then retyped somewhere else.
+- **Fees nobody can track.** Who has paid, who has paid part, and who is overdue lives in someone's head or a fragile spreadsheet.
+- **Cash that sits too long.** Money collected at the desk stays in a drawer because nobody totals the day properly.
+- **Edits with no trail.** A payment gets deleted or changed, and there's no record of who did it or why.
+- **The principal sees everything last.** Approvals happen over WhatsApp, and reports arrive days late.
+- **Parents call the office for every question.** Fee balances and receipts aren't available to them anywhere else.
+
+## What the school management software actually does
+
+This is a single web application with separate dashboards for each role: principal, accounts, teachers and guardians, plus a super-admin. Here's what each part handles, based on the real system running for the school.
+
+### Admissions with built-in approval
+
+Staff enter a new admission once: student and guardian details, class, birth registration, a scanned form and a photo. The system pulls in the **fee structure for that class and academic year** (admission fee, tuition, books, stationery and so on), applies any concession with a written reason, and calculates the gross total, discount and grand total. School policy that tuition can't be discounted is built right into the fee items. The admission then waits in the principal's approval queue before it becomes a live student record, and a printable or PDF receipt is generated automatically.
+
+When the admission is approved, the system can **create a login for the guardian** using their mobile number, so parents are onboarded at the same moment their child is.
+
+### Bulk student import
+
+Already have a student list? Upload a CSV or Excel file. The importer checks every row for required fields (student ID, name, class and guardian contact) and reports exactly which rows have problems before anything is saved. You can also download a ready-made template, so the first import doesn't turn into a formatting battle.
+
+### Fee invoices that track themselves
+
+Each student can have invoices with line items, due dates and statuses: pending, partial, paid, overdue or cancelled. An invoice past its due date is **flagged as overdue automatically**, and part-payments are recorded properly instead of being rounded into "paid" or "not paid". Every payment produces a branded receipt as a print view or a downloadable PDF.
+
+### A real cash book, not a spreadsheet
+
+The accounts module keeps a ledger across cash, bank, mobile-wallet and online accounts, with income, expenses and transfers between accounts. Two design choices matter most here:
+
+- **Nothing is quietly deleted.** To undo an entry, staff must request a reversal with a written reason, the request is reviewed, and a reversing entry is posted. The original stays on the books, so your audit trail stays intact.
+- **Day close.** At the end of each day, staff close the books. The system snapshots every account's balance, totals the day's income and expenses, and **reminds staff to deposit cash** once the cash in hand passes a set limit, so money doesn't pile up in a drawer.
+
+New income and expense categories are requested by accounts staff and approved by the principal, which keeps the chart of accounts tidy instead of letting it grow a new category every week.
+
+### One approval queue for the principal
+
+Admissions, new categories, expenses, income entries, ledger reversals, invoices, new staff hires and duty assignments all land in a **single prioritised approval queue**. The principal reviews and acts in one place, rather than chasing approvals through messages and paper.
+
+### Stock, assets and staff
+
+- **Inventory** for books, uniforms and stationery, with stock tracked in purchase lots on a first-in, first-out basis, sales and issues to students or staff, and **low-stock alerts** when an item drops below its reorder level.
+- **Asset registry** for furniture, equipment and other fixed assets, with location history, condition, revaluation and yearly depreciation.
+- **Staff and HR**: a staff directory with documents (CV, ID, appointment letters, certificates), hiring that goes through approval, duty assignments, and structured coordinator evaluations of teachers.
+
+### A director's briefing on demand
+
+Instead of waiting days for a report, the principal or directors can generate a **briefing with class-by-class numbers, money in and out, and bank positions**, and download it as a PDF.
+
+### A guardian portal parents actually use
+
+Guardians log in with their mobile number and see their child's invoices, overdue notices and receipts. The online payment flow is built to plug into a payment gateway (SSLCommerz is the default option, and the code also lists bKash, Nagad and Stripe as providers), and it's switched on per deployment once the school's merchant account is ready. For a school in Europe or North America, that's where a provider like [Stripe's payment platform](https://stripe.com/payments) would slot in.
+
+## What this means for your school
+
+Good school management software should pay for itself in saved hours and recovered fees. Here's what changes day to day:
+
+
+- **Hours back every week:** admissions, receipts and invoices are produced from data entered once.
+- **Fewer errors:** fee totals, discounts and overdue flags are calculated, not typed.
+- **Tighter cash control:** daily close, deposit reminders and reason-based reversals make leakage visible.
+- **Faster decisions:** the principal approves from one queue and pulls a briefing in seconds.
+- **Happier parents:** balances and receipts are available to them without a phone call.
+
+## Under the hood
+
+For the technically minded, the stack is modern and lightweight:
+
+- **React 19** with TypeScript, Vite and Tailwind CSS, deployed on **Vercel**.
+- **Firebase Authentication** and **Cloud Firestore** for logins and data, with file storage for scanned forms and photos.
+- **jsPDF** for receipts and reports, **SheetJS** for spreadsheet import, and Recharts for dashboard charts.
+
+If you're curious how I think about protecting records when several organisations or roles share one system, read [why I use row-level security on every multi-tenant project](/blog/why-row-level-security-multi-tenant). Since schools hold children's personal data, I also design with frameworks like the [UK ICO's guidance on UK GDPR](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/) in mind when adapting a build for European clients.
+
+### What it doesn't do (yet)
+
+To be honest about scope: this build is focused on admissions, finance, stock, staff and the parent portal. It doesn't currently include timetabling, exam result processing or a learning platform for lessons. Those can be added as later phases on the same student and class data.
+
+## Is school management software right for your school?
+
+If your team is juggling spreadsheets, paper receipts and approval messages, school management software built around your own fee rules, approval steps and reporting can give you back control without forcing you into someone else's workflow. I design and build these systems end to end, from data model to deployment, the same way I delivered my [security guard management software](/blog/security-guard-management-software) and [shipping management software case study](/blog/shipping-management-software-case-study). If you're weighing up who to hire, my guide on [questions to ask before hiring a full-stack freelancer](/blog/questions-before-hiring-full-stack-freelancer) is a good place to start, and you can see everything I build on my [web and software services page](/services).
+
+**[Book a short project call](/#contact)** and tell me how many students you have, how you handle fees today and where admin breaks down. I'll come back with a clear plan and a realistic timeline.
