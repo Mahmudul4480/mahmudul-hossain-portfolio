@@ -1,0 +1,71 @@
+---
+title: "School ERP Implementation: 9 Lessons Learned From a Real Rollout"
+slug: school-erp-implementation-lessons-learned
+excerpt: "What actually happens when a school moves admissions, fees and accounts into one ERP: the phases, the surprises and the school ERP implementation lessons learned that save time, money and goodwill."
+coverImage: /assets/school-erp-implementation-lessons-learned.png
+publishedAt: "2026-10-29T09:00:00.000Z"
+updatedAt: "2026-10-29T09:00:00.000Z"
+tags:
+  - Case Study
+  - Education
+  - Client Guide
+  - SaaS
+---
+
+Buying or building a school ERP is the easy part. The hard part is the day the office stops using the old spreadsheets and trusts the new system with real money, real parents and real deadlines. I learned that first-hand while building and rolling out the ERP for An-Noor International School. In an [earlier post](/blog/school-management-software) I covered *what* the software does. This one is about *how* it went live: the phases, the things that surprised me, and the **school ERP implementation lessons learned** that I now bring to every project.
+
+If you run or manage an independent school, academy or faith school in the UK, Europe, the US or Canada and you're weighing an ERP project, read this before you sign anything. It will save you weeks.
+
+## Why most school ERP projects struggle (and it isn't the code)
+
+Public audit reports on school district ERP rollouts keep repeating the same findings: weak oversight, testing squeezed at the end, migrated data nobody checked, and user permissions that grew out of control. Those are big districts with big budgets, yet small schools hit the same walls on a smaller scale. The software is rarely the problem. The problems are the process around it, the data going in and the people who have to change habits.
+
+## The phases that actually worked
+
+### Phase 1: Map the real workflow, not the ideal one
+
+Before writing a screen, I sat with the people doing the work: the front desk taking admissions, the accounts staff collecting fees, and the principal approving things. The goal was to write down what *actually* happens, including the workarounds. Things like "we give a sibling discount, but never on tuition" or "the principal signs off every admission" only surface when you watch real work.
+
+**Benefit for you:** every rule captured here is a rule the system enforces later, instead of a rule someone has to remember.
+
+### Phase 2: Build the money path first
+
+I resisted building everything at once. The first live slice was the path money takes: admission, fee structure per class and year, invoice, payment, receipt and cash book. Teachers, stock and the parent portal came after.
+
+**Benefit for you:** the part with the highest risk and the highest payoff gets tested longest, and the school sees value early.
+
+### Phase 3: Clean data before you migrate it
+
+Student lists arrive with duplicate names, missing guardian numbers and classes spelled three different ways. So the bulk importer validates every row and reports exactly which rows fail *before* saving anything, and staff get a ready-made template. Fixing data at the door is far cheaper than fixing it inside a live system.
+
+### Phase 4: Run in parallel, briefly
+
+For a short window, the office kept its old records alongside the new system so each day's totals could be compared. Once the numbers matched consistently, the old sheets were retired. Keep this window short and agreed in advance, or "parallel" quietly becomes "permanent".
+
+### Phase 5: Roll out by role, not all at once
+
+Accounts and admin went first, then the principal's approval dashboard, then guardians. Each role got its own dashboard showing only what they need, which made training a short walkthrough instead of a manual.
+
+## 9 school ERP implementation lessons learned
+
+1. **Name one decision-maker.** When fee rules or approvals are unclear, one person must be able to say "this is the policy". Without that, development stalls on debates.
+2. **Encode policy, don't document it.** If tuition can't be discounted, the system should make it impossible, not just discouraged.
+3. **Every edit needs a trail.** Who changed a payment, when and why. Audit logs end arguments and protect honest staff.
+4. **Approvals belong in the system, not on WhatsApp.** A queue for the principal is faster and leaves a record.
+5. **Permissions are a feature.** Design roles from day one. Audits of large school ERPs repeatedly flag excess access; it is much easier to start tight than to clean up later. (I wrote more on this in [why row-level security matters for multi-tenant apps](/blog/why-row-level-security-multi-tenant).)
+6. **Receipts are customer service.** Clean, automatic PDF receipts reduce phone calls from parents more than almost anything else.
+7. **Onboard parents at the moment of admission.** Creating a guardian login when an admission is approved means nobody has to chase parents later.
+8. **Train on real tasks, with real data.** "Take this admission and collect this fee" beats any slide deck.
+9. **Plan for after go-live.** The first weeks bring small requests: a new report, a renamed fee item. Budget time for them; they're a sign people are using it.
+
+## What I'd do differently next time
+
+I'd agree the go-live date for each module earlier and write down "done" criteria for each phase, so everyone knows when parallel running ends. I'd also schedule a short permissions review a month after launch, because roles always drift once people start asking for "just this one extra screen".
+
+## Is your school ready for an ERP?
+
+You're ready if you can answer three questions: who owns the fee and approval policy, where your current student data lives, and which process hurts most today. Start there, launch that slice first, and grow from it.
+
+If you're comparing vendors or freelancers, my checklist of [questions to ask before hiring a full-stack freelancer](/blog/questions-before-hiring-full-stack-freelancer) applies directly. The same implementation approach has worked on very different systems, from [security guard management software](/blog/security-guard-management-software) to [shipping operations](/blog/shipping-management-software-case-study).
+
+**Planning a school ERP, or rescuing one that stalled?** Have a look at [my services](/services) or [get in touch](/#contact). I'll help you scope the first slice so your school sees results in weeks, not terms.
