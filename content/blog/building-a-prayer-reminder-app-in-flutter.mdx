@@ -1,0 +1,100 @@
+---
+title: "Building a Prayer Reminder App in Flutter: 6 Lessons From Salah Upgrader"
+slug: building-a-prayer-reminder-app-in-flutter
+excerpt: "Building a prayer reminder app in Flutter taught me hard Android lessons: full-screen alarms, battery savers, Google Play paperwork and Firebase limits."
+coverImage: /assets/salah-upgrader-case-study.jpg
+publishedAt: "2026-11-02T13:30:00.000Z"
+updatedAt: "2026-11-02T13:30:00.000Z"
+tags:
+  - Case Study
+  - Flutter
+  - Android
+  - Firebase
+---
+
+*নামাজকে আল্লাহর সাথে সংযোগের মাধ্যম বানাতে একটা ডিজিটাল চিন্তা থেকেই এই অ্যাপ*
+
+*(This app grew out of one digital idea: making salah a way to connect with Allah.)*
+
+On paper, a prayer reminder is one of the simplest apps you could build. Show the time, ring an alarm, done. In practice, **building a prayer reminder app in Flutter** taught me more about Android than any client project I've delivered. This case study covers Salah Upgrader, the app I'm building, and the six problems that actually got in the way, with the fixes and lessons I took from each.
+
+## Why I'm building Salah Upgrader
+
+Salah Upgrader is a free Flutter app that helps people pray on time. The idea didn't start as a technical exercise. It started as a personal one: could a phone, the device that pulls our attention away all day, be turned into something that gently brings us back to salah?
+
+That framing changed how I thought about every feature. A missed reminder in a to-do app is an inconvenience. A missed reminder in an app built to help someone keep their prayers is a broken promise. So reliability became the main requirement, and most of the hard work went into making sure the reminder actually reaches the person.
+
+## The challenges of building a prayer reminder app in Flutter
+
+### 1. Alarms fired, but nobody saw them
+
+The first surprise: the alarm was firing, yet users weren't seeing it. On Android 14, a full-screen reminder quietly turns into a plain notification if one permission, "Display over other apps", is turned off. No error, no crash, just a reminder that slips into the notification shade unnoticed.
+
+**Fix:** a step-by-step permission screen where every permission is one tap away. Instead of hoping users find the right setting buried in system menus, the app walks them through each one.
+
+**Tip:** on modern Android, test with permissions *off* as well as on. The failure mode is often silent downgrading, not an obvious error.
+
+### 2. Samsung's battery saver put the app to sleep
+
+The second problem was timing. Samsung's battery saver put the app to sleep, so reminders came late. For a prayer app, a late reminder is close to a missed one.
+
+**Fix:** setup guidance shown only on the brands that need it. Users on devices without the problem don't get confused by extra steps, while users on affected brands get clear instructions.
+
+**Tip:** device manufacturers add their own power management on top of stock Android. Plan for brand-specific behaviour early rather than treating it as an edge case.
+
+### 3. One button that wouldn't close
+
+A small bug with a big lesson. One button on the reminder screen wouldn't close the screen, because it waited for the voice playback and the database work to finish first. To the user it simply felt frozen.
+
+**Lesson:** close the screen first and do the slow work afterwards. Respond to the user's tap immediately, then let background work finish in its own time. It's a rule that applies to every app I build, from Flutter to the web.
+
+## Shipping to Google Play: the non-code work
+
+### 4. Google Play paperwork is a project of its own
+
+Writing the app is only part of the job. Getting it onto Google Play needed its own checklist:
+
+- Targeting Android 16
+- A privacy policy
+- The Data Safety form
+- Careful wording around donations
+- Choosing between a **personal account**, which needs 12 testers for 14 days of closed testing, and an **organisation account**, which needs D-U-N-S verification
+
+**Tip:** if you're planning a launch date, budget time for this paperwork the same way you'd budget time for a feature. It is real work, and decisions like the account type affect your whole release timeline.
+
+### 5. Beware of "paid D-U-N-S" calls
+
+While sorting out the organisation account route, I ran into calls offering a "paid" D-U-N-S number. The number is free for Play developers.
+
+**Lesson:** get everything in writing, and verify before you pay anyone. If you're a first-time publisher, this is worth knowing before the phone rings.
+
+### 6. Free tiers have limits
+
+Google Play requires in-app account deletion. Supporting that pushed my Firebase backend onto a paid plan, which I set up with a budget alert so costs can't creep up unnoticed.
+
+**Tip:** read the store requirements before you lock in your backend plan. A policy rule can change your hosting costs, and a budget alert is a cheap safety net. I take a similar care with data on the web side, which I've written about in [why I use row-level security on every multi-tenant project](/blog/why-row-level-security-multi-tenant).
+
+## What building a prayer reminder app in Flutter taught me
+
+The biggest lesson: **reliability and trust matter more than features.** An app that reminds you to pray must never miss a prayer.
+
+That principle shaped the order of the work. Permissions, battery behaviour and responsive screens came before anything flashy, because none of the extra features would matter if the reminder didn't arrive on time. It's the same mindset I bring to business software, whether that's a [school management software](/blog/school-management-software) rollout or a [rental property management app for small landlords](/blog/rental-property-management-software-for-small-landlords): the boring, dependable parts are what users actually trust.
+
+## Practical checklist for your own Flutter reminder app
+
+If you're building a reminder or alarm app in Flutter for Android, here's what I'd check before launch:
+
+1. **Full-screen alerts:** confirm what happens on Android 14 when "Display over other apps" is off.
+2. **Permission onboarding:** make each required permission one tap away, with a clear explanation.
+3. **Battery management:** test on brands with aggressive battery savers, and show setup guidance only where it's needed.
+4. **Responsiveness:** close screens instantly and push slow work (audio, database writes) into the background.
+5. **Play Console requirements:** target API level, privacy policy, Data Safety form and careful wording for anything involving money or donations.
+6. **Account type:** decide early between a personal account (closed testing with 12 testers for 14 days) and an organisation account (D-U-N-S verification).
+7. **Scams:** the D-U-N-S number is free for Play developers, so verify before paying anyone.
+8. **Backend costs:** check whether store rules such as in-app account deletion change your backend plan, and set a budget alert.
+
+## Want to test Salah Upgrader?
+
+Salah Upgrader is still being built, and feedback is what will make it better. If you'd like to try it as a tester, or tell me which feature you'd most want in a prayer reminder app, [get in touch](/#contact).
+
+And if you're planning an app of your own and want someone who sweats the reliability details, start with my [questions to ask before hiring a full-stack freelancer](/blog/questions-before-hiring-full-stack-freelancer), then [book a short project call](/#contact).
