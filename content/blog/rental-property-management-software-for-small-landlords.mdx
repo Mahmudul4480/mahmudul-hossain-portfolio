@@ -1,0 +1,100 @@
+---
+title: "Rental Property Management Software for Small Landlords: Rent, Tenants & Bills in One App"
+slug: rental-property-management-software-for-small-landlords
+excerpt: "Rental property management software for small landlords: track rent, part-payments, utility bills, deposits, receipts and tenant files in one simple app."
+coverImage: /assets/rental-property-management-software-for-small-landlords.png
+publishedAt: "2026-11-02T09:00:00.000Z"
+updatedAt: "2026-11-02T09:00:00.000Z"
+tags:
+  - Case Study
+  - Real Estate
+  - React
+  - Firebase
+---
+
+It's the fifth of the month. Two tenants have paid, one has paid half "and will send the rest Friday", the electricity readings are scribbled on the back of an envelope, and you can't remember whether flat 3B's deposit was two months or three. You own a handful of units, not a property empire, yet the admin eats your evenings. That's exactly the gap **rental property management software for small landlords** should close, and it's why I built Bariowala, a landlord app that puts rent, tenants, bills and paperwork in one place. Here's what it does, and what a build like it could do for your portfolio.
+
+## The hidden cost of managing rentals from a notebook
+
+Whether you let three flats in Manchester, a duplex in Ohio or a small building in Toronto, small landlords tend to hit the same walls:
+
+- **Part-payments get lost.** A tenant pays some of the rent, and a week later nobody is sure what's still owed.
+- **Utility recharges are guesswork.** Meter readings, rates and who owes what for electricity, gas or water live in scattered notes.
+- **Deposits and advances blur together.** At move-out you're digging for what was actually collected, and whether it was ever returned.
+- **Damage turns into an argument.** Without dated photos of the flat at move-in, every scuff becomes your word against theirs.
+- **Chasing rent feels awkward.** So reminders go out late, or not at all.
+- **You never see the real profit.** Rent comes in, but repairs, staff wages and annual property tax go out from different places, so the true net is a mystery.
+
+None of this is about being disorganised. It's that spreadsheets and notebooks were never built to join these pieces up. Joining them up is the whole job of rental property management software for small landlords.
+
+## What Bariowala actually does
+
+Bariowala (sold as Bariwala Pro) is a web app I designed and built for landlords in Bangladesh. It's Bangla-first with a one-click English toggle, and it runs on phones as well as desktops. There's a free public demo workspace anyone can open, and paid packages for landlords who want their own. Everything below is taken from the live code, not a wish list.
+
+### Buildings, flats and complete tenant files
+
+Add each building with its address and number of flats, then add tenants with their flat number, rent, join date and lease end date. Each tenant record holds ID details, emergency contacts, previous landlord, family members and uploaded copies of their ID, tenancy agreement and photo. Images are compressed on the device before they're uploaded, so a phone photo of a lease doesn't eat your storage.
+
+Advance rent (and how many months it covers) is tracked **separately from the security deposit**, and each deposit is marked as held or refunded. When a tenant moves out, the app records the move-out date and any dues left unpaid, so history stays intact instead of being deleted.
+
+### A rent ledger that understands part-payments
+
+This is where rental property management software for small landlords earns its keep. Each month's rent is a bill, and every payment against it is recorded on its own. If a tenant pays half, the ledger shows the month's total, what's been received so far and the exact amount still due. No more rounding a messy month into "paid" or "unpaid".
+
+### Utility billing: fixed or by meter
+
+For each tenant you choose how electricity, gas and water are charged: not at all, a fixed monthly amount, or by meter. In meter mode you enter this month's reading and the app pulls the previous one, works out units used multiplied by your rate, and can **add the charge to that month's rent bill** so the tenant gets one clear total.
+
+### Digital receipts and polite reminders
+
+When rent is collected, Bariowala generates a branded receipt (image and PDF) showing the month, this payment, the total received and any balance left. With one tap it opens WhatsApp with the receipt message ready to send to the tenant.
+
+For reminders, you select the tenants who owe money and the app builds a **WhatsApp queue**: each message is pre-filled with the tenant's name, the month and their due amount, and you tap through them one by one. Packages with messaging can also send bulk SMS through a gateway, with a quota shown on screen so there are no surprise costs.
+
+### Move-in and move-out photos, room by room
+
+The flat condition module captures photos per room (drawing room, kitchen, bedrooms, bathrooms, balcony, plus any custom room you add) at move-in and again at move-out. A **side-by-side comparison view** puts the two sets together, so a deposit deduction is backed by dated evidence instead of memory. If you let property in the UK, that's precisely the kind of record that helps when a deposit is disputed under the [GOV.UK tenancy deposit protection rules](https://www.gov.uk/tenancy-deposit-protection).
+
+### Expenses, property tax and a real profit figure
+
+Income and expenses are logged by category: utility bills, caretaker and cleaner wages, plumber, electrician and mechanic costs, and more. You can enter your annual property (holding) tax and other yearly overheads, and the app spreads them across the months when it calculates your net. Monthly and annual **financial reports download as PDF**, with charts in the reports view.
+
+### A dashboard that warns you early
+
+The dashboard shows rent collected and dues at a glance, gives each tenant a simple payment-consistency score based on their history, and raises **lease expiry alerts at 30, 15 and 7 days** so renewals never sneak up on you.
+
+### Local compliance, built in
+
+Landlords in Bangladesh's big cities have to submit tenant information forms to the police. Bariowala fills those forms (with separate layouts for Dhaka and Chattogram) from the tenant record and exports them as a PDF, tracking each tenant as pending, ready or submitted. For a landlord in Europe or North America, that same slot would hold whatever paperwork your jurisdiction expects. In Canada, for example, the [CMHC's guide to renting a home](https://www.cmhc-schl.gc.ca/consumers/renting-a-home) is a good starting point for what a tenant file should cover.
+
+## What rental property management software for small landlords changes day to day
+
+Good rental property management software for small landlords should give you back time and money, not add another chore. In practice that means:
+
+- **Hours saved every month:** receipts, utility charges and reminders are produced from data you enter once.
+- **Fewer errors:** balances, meter charges and net profit are calculated, not typed.
+- **Fewer disputes:** part-payments, deposits and room-by-room photos are all on record.
+- **More control:** you see who owes what, which leases are ending and what each building really earns.
+- **Room to grow:** adding a second building is a form, not a new spreadsheet.
+
+## Under the hood
+
+For the technically curious, the stack is modern and lightweight:
+
+- **React 19** with TypeScript, Vite and Tailwind CSS.
+- **Firebase Authentication** and **Cloud Firestore**. Any rental property management software for small landlords holds tenants' personal data, so Firestore access rules check that every building, tenant and transaction belongs to the signed-in landlord's workspace. If you want to see how that kind of protection works, Google's [Firebase Security Rules documentation](https://firebase.google.com/docs/rules) is the reference I build against.
+- **jsPDF** for receipts, reports and forms, and **Recharts** for dashboard charts.
+
+I've written more about why I isolate each customer's data this way in [why I use row-level security on every multi-tenant project](/blog/why-row-level-security-multi-tenant).
+
+### What it doesn't do (yet)
+
+To be clear about scope: Bariowala is built for the Bangladeshi market, so prices are in taka and payments for the app itself are made by bKash. It doesn't collect rent online through a card gateway, run tenant credit checks or list vacancies on property portals. If I build rental property management software for small landlords in the UK, US or Canada, those are exactly the pieces I'd adapt: your currency, your payment provider, your local forms and your language.
+
+## Is rental property management software for small landlords right for you?
+
+If you're juggling a notebook, a spreadsheet and a WhatsApp thread for every tenant, rental property management software for small landlords, shaped around your own buildings and rules, can give you control back without paying for an enterprise platform you'll never fully use. You can [open the free Bariowala demo](https://www.socialmediacaring.com/bariowala) to see the real thing.
+
+I design and build these systems end to end, the same way I delivered my [school management software](/blog/school-management-software) and [security guard management software](/blog/security-guard-management-software). If you're weighing up who to hire, start with my [questions to ask before hiring a full-stack freelancer](/blog/questions-before-hiring-full-stack-freelancer), and if you also need a site to fill your vacancies, see my [landing page development service](/services/landing-page-development).
+
+**[Book a short project call](/#contact)** and tell me how many units you manage, how you collect rent today and where the admin breaks down. I'll come back with a clear plan and a realistic timeline.
