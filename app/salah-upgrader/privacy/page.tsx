@@ -102,7 +102,8 @@ export default function SalahUpgraderPrivacyPage() {
                     used).
                   </li>
                   <li>
-                    <strong>Device or other IDs:</strong> the Firebase app instance ID.
+                    <strong>Device or other IDs:</strong> the Firebase app instance ID and your
+                    device&apos;s <strong>Android advertising ID</strong>.
                   </li>
                 </ul>
                 <p>
@@ -131,9 +132,10 @@ export default function SalahUpgraderPrivacyPage() {
                   .
                 </p>
                 <p>
-                  <strong>Opt-out:</strong> you can reset the app instance ID by clearing the
-                  app&apos;s data or uninstalling the app, or email{" "}
-                  <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> with questions.
+                  <strong>Advertising ID &amp; opt-out:</strong> The app has no in-app analytics
+                  opt-out. You can reset your advertising ID or delete it / opt out of ads
+                  personalization in <strong>Android Settings &gt; Google &gt; Ads</strong>. Clearing
+                  app data or uninstalling resets the app instance ID.
                 </p>
 
                 <h2>4. Data downloaded from our servers</h2>
@@ -194,9 +196,21 @@ export default function SalahUpgraderPrivacyPage() {
                   </li>
                   <li>
                     অ্যাপ উন্নত করতে Google Analytics for Firebase ব্যবহার করা হয়: অ্যাপ ব্যবহারের
-                    তথ্য (কোন স্ক্রিন/ফিচার) ও অ্যাপ ইনস্ট্যান্স আইডি। শুধু অ্যানালিটিক্সের জন্য,
-                    বিক্রি বা বিজ্ঞাপনে ব্যবহার হয় না, Google ছাড়া কারো সঙ্গে শেয়ার হয় না,
-                    এনক্রিপ্টেড অবস্থায় পাঠানো হয়।
+                    তথ্য (কোন স্ক্রিন/ফিচার), অ্যাপ ইনস্ট্যান্স আইডি ও Android বিজ্ঞাপন আইডি
+                    (Advertising ID)। শুধু অ্যানালিটিক্সের জন্য, বিক্রি বা বিজ্ঞাপনে ব্যবহার হয় না,
+                    Google ছাড়া কারো সঙ্গে শেয়ার হয় না, এনক্রিপ্টেড অবস্থায় পাঠানো হয়।
+                  </li>
+                  <li>
+                    অ্যাপের ভেতরে অ্যানালিটিক্স বন্ধের অপশন নেই। বিজ্ঞাপন আইডি রিসেট বা বন্ধ করতে:
+                    Android Settings &gt; Google &gt; Ads। বিস্তারিত:{" "}
+                    <a
+                      href="https://policies.google.com/technologies/partner-sites"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      policies.google.com/technologies/partner-sites
+                    </a>
+                    ।
                   </li>
                   <li>
                     অ্যাপ আমাদের সার্ভার থেকে রিমাইন্ডার মেসেজ ও ভয়েস ডাউনলোড করতে পারে; আপনার
