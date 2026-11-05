@@ -1,0 +1,36 @@
+.hero{position:relative;overflow:hidden;isolation:isolate;min-height:88vh}
+#skyCv{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(transparent,#0C1220);z-index:-1;pointer-events:none}
+.waqt-pill{position:absolute;right:20px;top:18px;z-index:3;display:flex;gap:6px;background:rgba(12,18,32,.55);backdrop-filter:blur(8px);border:1px solid rgba(217,164,65,.35);border-radius:999px;padding:5px}
+.waqt-pill button{all:unset;cursor:pointer;font-size:12px;padding:5px 10px;border-radius:999px;color:#e8dcc0;transition:background .4s,color .4s}
+.waqt-pill button.on{background:#D9A441;color:#0C1220;font-weight:700}
+.px{will-change:transform;transition:transform .25s ease-out}
+.reveal{transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal:not(.in){transform:translateY(34px) scale(.98)}
+.ov-btns button{position:relative;overflow:hidden;transition:transform .2s}
+.ov-btns button:hover{transform:translateY(-2px)}
+.ov-btns button.pop{animation:mPop .55s ease}
+@keyframes mPop{0%{transform:scale(1)}30%{transform:scale(.9)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+.mRipple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:mRip .7s ease-out forwards;pointer-events:none}
+@keyframes mRip{to{transform:scale(4);opacity:0}}
+.mSpark{position:fixed;width:7px;height:7px;border-radius:50%;background:#D9A441;pointer-events:none;z-index:9999;box-shadow:0 0 8px #D9A441;animation:mSp .9s ease-out forwards}
+@keyframes mSp{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+#dOv{animation:mOvIn .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes mOvIn{from{opacity:0;transform:scale(.94);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+#bars>*{transform-origin:bottom;animation:mBar 1.2s cubic-bezier(.2,.8,.2,1) both}
+#bars>*:nth-child(n){animation-delay:calc(var(--i,0)*60ms)}
+@keyframes mBar{from{transform:scaleY(0)}}
+#path.in>*{animation:mStep .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes mStep{from{opacity:0;transform:translateY(20px) scale(.9)}}
+.btn-gold{position:relative;overflow:hidden}
+.btn-gold::before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:mShine 3.5s infinite}
+@keyframes mShine{0%,70%{left:-60%}100%{left:130%}}
+@media (max-width:700px){.waqt-pill{left:10px;right:10px;justify-content:center;top:8px}.waqt-pill button{padding:4px 7px;font-size:11px}.hero{min-height:auto;padding-top:64px}}
+@media (prefers-reduced-motion:reduce){.reveal:not(.in){filter:none}.px{transform:none!important}.btn-gold::before{display:none}}
+/* phone float */
+.phone{--ppx:0px;--ppy:0px;animation:mFloat 5.6s ease-in-out infinite;will-change:transform,box-shadow}
+#how .phone{animation-delay:-2.3s}
+@keyframes mFloat{
+0%,100%{transform:translate(var(--ppx),calc(var(--ppy) + 0px)) rotate(-1.2deg);box-shadow:0 30px 60px -20px rgba(0,0,0,.65),0 0 40px rgba(217,164,65,.12),0 0 0 1px #ffffff14}
+50%{transform:translate(var(--ppx),calc(var(--ppy) - 10px)) rotate(1.2deg);box-shadow:0 44px 70px -26px rgba(0,0,0,.45),0 0 60px rgba(217,164,65,.22),0 0 0 1px #ffffff14}}
+@media (prefers-reduced-motion:reduce){.phone{animation:none!important}}
