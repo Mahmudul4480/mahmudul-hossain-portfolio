@@ -3,6 +3,12 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async rewrites() {
+    return [
+      { source: "/salah-upgrader", destination: "/salah-upgrader/index.html" },
+      { source: "/salah-upgrader/", destination: "/salah-upgrader/index.html" },
+    ];
+  },
   async redirects() {
     return [
       {

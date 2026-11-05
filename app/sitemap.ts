@@ -63,6 +63,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.85,
     },
+    {
+      url: `${siteConfig.url}/salah-upgrader`,
+      lastModified: contentUpdated,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${siteConfig.url}/salah-upgrader/privacy`,
+      lastModified: contentUpdated,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
     ...serviceRoutes,
     ...blogRoutes,
     ...tagRoutes,
