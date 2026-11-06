@@ -1,0 +1,105 @@
+---
+title: "Shipping a Flutter Android App With an AI Agent Team: What Happened on Nov 5"
+slug: shipping-flutter-android-app-with-ai-agent-team
+excerpt: "A real Nov 5 diary of shipping a Flutter Android app with an AI agent team: phone bugs, package rename, Firebase Analytics, Play Data safety, and a landing page built from adb screenshots."
+coverImage: /assets/ai-agent-team-flutter-android-cover.jpg
+publishedAt: "2026-11-05T15:30:00.000Z"
+updatedAt: "2026-11-05T15:30:00.000Z"
+tags:
+  - Case Study
+  - Flutter
+  - Android
+  - AI Agents
+  - Salah Upgrader
+---
+
+People talk about AI agents like they replace the developer. Mine don't. They replace the empty hours between decisions.
+
+This is a field note from **5 November 2026** about **shipping a Flutter Android app with an AI agent team** — Salah Upgrader, my free prayer-reminder app. Not a framework pitch. Just what landed on my Samsung that day, what broke, who fixed which piece, and where I still had to say yes before anything went live.
+
+If you want the product itself, the landing page is already up at [/salah-upgrader](/salah-upgrader).
+
+## The team is not one chat window
+
+I run specialised agents the way a small studio runs roles. They pass work through messages. I approve every publish, every spend, and every send.
+
+- **Prayer Reminder App** — the Flutter lead. Code lives on my PC. Builds go over **adb** straight to my Samsung phone, so "done" means I can tap it, not that a CI job went green.
+- **Salah Upgrader Play Launch** — Play compliance. Data safety form. Privacy policy wording that has to match what the app actually collects.
+- **Marketing group (Bangla)** — Research & Theme Maker, Script Writer, Post Designer, Motion Video & Social Poster, and Ads for Google/Facebook. They work in Bangla because that's where the audience is.
+- **Mahmudul Hossain Site** — this site: the [/salah-upgrader](/salah-upgrader) landing page, the privacy page, and posts like this one.
+
+Faith content in the app is scholar-reviewed. I don't treat a draft translation as final just because an agent can write fluent Bangla.
+
+## What we actually built and tested on the phone
+
+On Nov 5 the Flutter lead shipped and tested real features on the device, not in a mock:
+
+- a **monthly report** with a full-screen Quran ayat card and its own chime
+- **gentle nudge notifications** for new and inactive users
+- a **prominent forbidden-time banner** on Home
+- a **splash screen** with a 45-degree light-ray sweep
+- a **1-minute test button** so I can trigger a reminder without waiting for the next waqt
+
+![Salah Upgrader splash with light-ray sweep](/assets/blog/salah-agent-splash.webp)
+
+![Home screen with prayer times](/assets/blog/salah-agent-home.webp)
+
+![Full-screen forbidden-time card](/assets/blog/salah-agent-forbidden.webp)
+
+![Monthly report ayat card](/assets/blog/salah-agent-report.webp)
+
+That last point — the one-minute test button — matters more than it sounds. A prayer app that you can only verify five times a day will ship broken. I needed a short path from "agent says fixed" to "I heard the sound on this phone."
+
+## Three bugs I found on my phone, fixed the same day
+
+Agents can write Flutter. They still can't feel a silent alarm the way a person holding the handset can. On Nov 5 I caught three issues myself:
+
+1. **The test reminder was silent.** The screen came up; the sound didn't. For a reminder product, that's a failed promise.
+2. **The tune kept playing after I closed the reminder.** Closing the UI must stop the audio. It didn't, until we fixed it.
+3. **The sunrise/birds animation was missing at night.** A scene that only works in one lighting condition is a bug, even if daytime looks fine.
+
+All three were fixed the same day. That's the loop I care about: agent builds → adb install → I use it like a user → I send the failure back in plain language → agent patches → I retest on the same Samsung.
+
+![Full-screen prayer reminder (test subtitle redacted)](/assets/blog/salah-agent-reminder.webp)
+
+![Home forbidden-time banner (personal greeting redacted)](/assets/blog/salah-agent-home-banner.webp)
+
+## Package rename, with backups first
+
+We renamed the Android package to `com.mahmudulhossain.salahupgrader`. Before touching it, we took backups. Package IDs look like a one-line change until signing, Play Console, Firebase, and old installs disagree with each other. Doing the rename carefully beat "we'll fix it in the next build."
+
+## Firebase Analytics, two projects, and the paperwork that has to match
+
+Play Launch and the site agents moved together on the compliance side:
+
+- **Firebase Analytics** with separate **dev (debug)** and **prod (release)** projects
+- **GA4** linked with **14-month** retention
+- the **Data safety** form and the **privacy policy** updated to match
+- landing and privacy pages published the same day: [/salah-upgrader](/salah-upgrader) and [/salah-upgrader/privacy](/salah-upgrader/privacy)
+
+I'm not pasting project IDs or keys here on purpose. The useful lesson is organisational: analytics without a matching privacy page is how launches stall. The Play Launch agent drafts; I read the form against what the code really sends; then the Site agent puts the policy where Google can crawl it.
+
+## Seventeen screenshots, cleaned status bar, straight onto the landing page
+
+We captured **17 screenshots automatically over adb**, with the status bar cleaned so the store-and-site assets don't show random notifications. Those shots became the phone mockups on the live landing page.
+
+That pipeline matters for **shipping a Flutter Android app with an AI agent team**: the same build that lands on my phone can feed marketing and the website without me manually cropping seventeen PNGs at midnight. Personal bits on a few home screens get blurred or cropped before publish. Test copy on a reminder screen never becomes the hero image.
+
+## Still in progress
+
+Honesty beats a fake ship date:
+
+- **Release signing** and the **release AAB** build are in progress.
+- Marketing is sorting the **YouTube** channel and **Postiz** scheduling for Bangla posts and motion.
+
+Nothing gets published, paid for, or sent until I approve it. Agents draft and hand off. I own the gate.
+
+## What this taught me about agent teams
+
+**Shipping a Flutter Android app with an AI agent team** only works when the agents have sharp jobs and the human keeps the boring powers: merge, money, and messages to the outside world.
+
+The Flutter lead can move fast because it installs on a real phone. Play Launch can move fast because it is allowed to obsess over forms. Marketing can move in Bangla without waiting for me to write every caption. The site agent can ship a landing page the same day the privacy text lands.
+
+My job is smaller and stricter: test on the device, catch the silent reminder, say no to secrets in blog posts, and approve the publish.
+
+If you want to see the current build of the product story — splash, forbidden times, report card, the rest — start at [/salah-upgrader](/salah-upgrader). The Play package is `com.mahmudulhossain.salahupgrader`.
