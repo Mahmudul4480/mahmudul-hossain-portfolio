@@ -1,0 +1,131 @@
+---
+title: "How I Got a Flutter Prayer App Into Google Play Closed Testing Review"
+slug: publish-flutter-app-google-play-closed-testing
+excerpt: "A Chattogram founder's practical notes on how to publish a Flutter app to Google Play closed testing: Data safety, full-screen alarms, signing, analytics, and why Salah Upgrader ships with no ads."
+coverImage: /assets/publish-flutter-google-play-closed-testing-cover.jpg
+publishedAt: "2026-11-06T00:45:00.000Z"
+updatedAt: "2026-11-06T00:45:00.000Z"
+tags:
+  - Case Study
+  - Flutter
+  - Google Play
+  - Android
+  - Salah Upgrader
+---
+
+I'm writing this from Chattogram, a few hours after I hit **Send for review** on Salah Upgrader.
+
+Not production. Not "live on Play." **Closed testing** — Alpha track — with a pile of App content forms filled in and **17 changes** sitting in review. If you're trying to **publish a Flutter app to Google Play closed testing**, this is the paper trail I wish I'd had in one place.
+
+The product story of how we built the app with an agent team is a [separate post](/blog/shipping-flutter-android-app-with-ai-agent-team). This one is about the Play Console side: compliance, signing, store listing, and the choices that keep a worship reminder honest.
+
+## What Salah Upgrader actually is
+
+Salah Upgrader is a free, **ad-free** Flutter Android prayer-reminder utility. Package name: `com.mahmudulhossain.salahupgrader`.
+
+At each prayer time a **full-screen loving reminder** appears — a short message, then two buttons: **accept** (go pray) or **"a little later"** (limited snoozes, then a second reminder near the end of the prayer window). The tone is deliberate. No scare copy. Ever.
+
+Other pieces that matter for the product, not the hype deck:
+
+- **Profession-based, question-style prompts** — the app asks, it doesn't lecture
+- A **secret encrypted dua journal**
+- Built and iterated on a real **Samsung Galaxy A73**, with full-screen reminder and tune tests on the device
+
+Landing page: [/salah-upgrader](/salah-upgrader). Privacy: [/salah-upgrader/privacy](/salah-upgrader/privacy).
+
+## Why closed testing, not "ship it"
+
+On a personal Play developer account, production eligibility after closed testing still means **12+ Android testers for 14 days**. So the path is: get the release into review → wait for approval → invite testers → hold the closed test long enough → then production.
+
+Right now the status is simple: **changes in review**. No production rollout. Reviews often land within about a week, but I treat that as a hope, not a promise.
+
+Release for this Alpha: **1.0.0**, available to **177 countries + rest of world**, store name **Salah Upgrader: Prayer Alarm**, category **Lifestyle**.
+
+## The compliance checklist that ate the week
+
+Play doesn't care how pretty your Flutter widgets are until the paperwork matches the binary.
+
+### App content and Data safety
+
+I filled the App content questionnaire end to end:
+
+- Privacy policy URL pointed at the live page on this site
+- **Data safety**: approximate location, app interactions, diagnostics, and device IDs — **collected, not shared**
+- **No ads**
+- Target audience **13+**
+- Content rating **Everyone / 3+**
+- Declared as a **trader**
+- Full-screen intent declared as **Alarm clock**
+- Exact alarm declared as **Alarm clock**
+
+That last pair is not a clever trick. The reminder is an alarm path. Declaring it that way is how you stay honest with the policy forms.
+
+### The permission I removed on purpose
+
+We had an unused `FOREGROUND_SERVICE_SPECIAL_USE` declaration. Play would have asked for a special-use demo video. The reminder already works through the **alarm + full-screen intent** path, so I removed the unused permission before submission.
+
+Lesson: every declared capability is a question Google can ask. If you don't need it, don't ship it.
+
+### Signing, symbols, analytics
+
+Behind the scenes, before the "Send for review" click:
+
+- Release **upload keystore** created and backed up
+- Signed **AAB**
+- **NDK 28** with native debug symbols (`SYMBOL_TABLE`) attached
+- Production Firebase project + GA4, analytics retention set to **14 months**
+- Analytics **advertising ID** on for v1
+- Firebase Analytics fires an `onboarding_complete` event when someone finishes first-time setup — **no personal data** in that event
+
+None of that is glamorous. All of it is what "ready for review" actually means.
+
+## Store listing without the hype voice
+
+en-US listing for closed testing:
+
+- Name: **Salah Upgrader: Prayer Alarm**
+- Short + full descriptions
+- **512** icon
+- Feature graphic labeled as AI-generated (Midnight Gold, 1024×500)
+- **Five** phone screenshots
+- Lifestyle category
+
+Screenshots came from the device — home and prayer times, full-screen reminder, monthly report, reminder settings, wishes, learn. The feature graphic is the one asset I marked as AI so the listing stays transparent.
+
+## A package rename that taught me about encrypted data
+
+We renamed the package before submission. Old encrypted dua rows could not decrypt under the new package key. Early versions of the list hung forever while they tried.
+
+Fix: the list no longer hangs. Migrating users are told to **copy their duas before uninstalling the old app**.
+
+If you encrypt local data keyed to the app identity, treat a package rename as a data-migration event, not a rename-and-forget.
+
+## Why no ads — my choice, not a slogan
+
+I could have put a banner under a prayer reminder. I didn't.
+
+A worship reminder shouldn't monetize attention. That is a personal product decision for Salah Upgrader, not a lecture for every Islamic utility. Free and ad-free means the reminder's job is the reminder — not a funnel into someone else's ad auction.
+
+## What "in review" means for you as a reader
+
+If you found this post looking for how to **publish a Flutter app to Google Play closed testing**, here's the short version of my sequence:
+
+1. Ship a signed AAB with the permissions you actually use
+2. Match privacy policy + Data safety to real collection (and say "not shared" only when you mean it)
+3. Declare full-screen / exact-alarm use cases accurately
+4. Fill store listing assets before you click review
+5. Send closed-testing changes — then wait
+6. After approval: run the tester period your account type requires before production
+
+Salah Upgrader is **not** live on the public Play Store yet. It is in review for closed testing. When that clears, the next gate is the tester window, not a victory lap.
+
+## What's planned (not shipping)
+
+A longer roadmap exists — community-style levels and deeper amal reporting among other ideas. None of that is in this closed-test release. Planned, not shipping.
+
+## Links
+
+- Product: [mahmudulhossain.com/salah-upgrader](https://www.mahmudulhossain.com/salah-upgrader)
+- Privacy: [mahmudulhossain.com/salah-upgrader/privacy](https://www.mahmudulhossain.com/salah-upgrader/privacy)
+
+If you're a Bangladeshi indie shipping a Flutter utility, I hope the boring parts above save you a rejection cycle. The exciting parts are on the phone. The review button only cares that the forms match the APK.
