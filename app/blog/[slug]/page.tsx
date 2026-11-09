@@ -46,7 +46,7 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
       modifiedTime: post.updatedAt ?? post.publishedAt,
       authors: [siteConfig.name],
       tags: post.tags,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.coverAlt ?? post.title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -60,7 +60,16 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
 export const revalidate = 60;
 
 function articleJsonLd(post: BlogPost) {
-  const image = getPostOgImage(post, siteConfig.url);
+  const imageUrl = getPostOgImage(post, siteConfig.url);
+  const image = post.coverAlt
+    ? {
+        "@type": "ImageObject",
+        url: imageUrl,
+        caption: post.coverAlt,
+        width: 1280,
+        height: 720,
+      }
+    : imageUrl;
 
   return {
     "@context": "https://schema.org",
@@ -131,7 +140,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="blog-post-cover-wrap">
                   <Image
                     src={post.coverImage}
-                    alt=""
+                    alt={post.coverAlt ?? ""}
                     width={1200}
                     height={630}
                     className="blog-post-cover"

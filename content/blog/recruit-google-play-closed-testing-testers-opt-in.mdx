@@ -1,0 +1,111 @@
+---
+title: "Recruiting Google Play Closed Testing Testers: What Happened After Approval"
+slug: recruit-google-play-closed-testing-testers-opt-in
+excerpt: "What happened after Salah Upgrader’s closed test was approved: how I recruited Google Play closed testing testers, the Group + opt-in steps, and the first feedback that reached code."
+coverImage: /assets/recruit-google-play-closed-testing-testers-cover.jpg
+coverAlt: "Join Group, Opt in, and Feedback — the three steps to recruit Google Play closed testing testers for Salah Upgrader"
+publishedAt: "2026-11-10"
+updatedAt: "2026-11-10"
+tags:
+  - Google Play
+  - Flutter
+  - Android
+  - Salah Upgrader
+---
+
+A few days after Google Play approved Salah Upgrader for **closed testing**, I still did not have a public app.
+
+The earlier posts covered [shipping with an AI agent team](/blog/shipping-flutter-android-app-with-ai-agent-team) and [getting the Flutter build into closed-testing review](/blog/publish-flutter-app-google-play-closed-testing). This one starts where those stop: what it took to **recruit Google Play closed testing testers** once the track said *Available to selected testers*.
+
+For **newly created personal developer accounts**, Google requires a closed test with at least **12 testers opted in continuously for 14 days** before you can apply for production access. That is Google’s rule, not a slogan — see [App testing requirements for new personal developer accounts](https://support.google.com/googleplay/android-developer/answer/14151465). Quoting it is easy. Filling it is the work.
+
+## What “approved” looked like
+
+On the morning of **6 November 2026** (Asia/Dhaka), Play Console showed the closed-testing Alpha release as **Available to selected testers**. Production was still inactive.
+
+Two links mattered:
+
+1. Tester Google Group: [groups.google.com/g/salah-upgrader-testers](https://groups.google.com/g/salah-upgrader-testers)
+2. Opt-in page: [play.google.com/apps/testing/com.mahmudulhossain.salahupgrader](https://play.google.com/apps/testing/com.mahmudulhossain.salahupgrader)
+
+The public store URL only works for people who are already eligible and opted in. For everyone else it can look missing. That is expected for a closed test, and it confused the first friends who opened the store link cold.
+
+At that first check after approval, **zero** testers had opted in. Approval without people is only a green status.
+
+## The three steps I had to spell out
+
+Every tester needed the **same Gmail** on the phone’s Play Store, then:
+
+1. Join the Google Group  
+2. Open the opt-in link and tap **Become a tester**  
+3. Install from Google Play
+
+Group membership alone does not count toward Google’s production gate. Play counts **opted-in** testers.
+
+Midweek, the Group and the Console did not always match. On one check the Group looked larger (around ten people including me) while Play still showed **9 testers currently opted-in**; later the opted-in count moved to **10**. I did not audit every missing person, so I will not invent a single cause. What I did change in my invites was practical: send the Group link and the opt-in link together, and say clearly that joining the Group is not the finish line.
+
+## Who I asked for
+
+Salah Upgrader is a free, ad-free prayer reminder. I wanted feedback from people who already live with salah — not a random paid list.
+
+I asked for people who:
+
+- pray the five daily prayers (in jamaat or alone)
+- are practising and can give honest product notes
+- have an Android phone
+- can use the app daily for 14 days
+- will not uninstall during that window
+- will say in the Google Group what helps, what gets in the way, and what they need
+
+That ask went out on my personal Facebook, LinkedIn, and the Social Media Care page, with the three join steps and a clear line that the app was **not** open to everyone yet.
+
+## Where things stood on 9 November
+
+As of the **9 November 2026** (Asia/Dhaka) Console snapshot I am writing from:
+
+- Production: **Inactive**
+- Closed testing release: published
+- At least 12 testers opted in: yes
+- 12 testers opted in continuously for 14 days: **not yet** — the dashboard said **12 testers have currently been opted in for 1 day**
+- **Apply for production** was still unavailable
+
+The Google Group showed **15** members including me. Group size and opted-in count are related, not identical — which is why both need a look.
+
+I am not publishing install numbers here. Play’s statistics and what people told me privately did not always feel like the same picture, and this post does not need a guessed install count.
+
+## Four fixes from closed-test feedback
+
+Closed testing only helps if feedback reaches the product.
+
+As of **9 November 2026**, these four changes were **merged into the app’s private `main` branch**. They were **not yet in the Play closed-testing build**:
+
+1. **Wrong qaza after install.** Prayer times that had already ended before install were being counted as qaza. They are skipped now, and old wrong entries clean up on launch.
+2. **Reminders stopping after quiet days.** Alarms are scheduled further ahead (7 days instead of 3), with a resync while the app runs, and a notice the evening before asking the person to open the app once.
+3. **Own duas were stuck.** People can edit and delete duas they added (delete asks for confirmation).
+4. **Silent save from a notification.** Saving a dua from a notification now shows a confirmation, returns home, and blocks accidental double-saves.
+
+That is the record I want on file when the production questionnaire later asks what testers found and what changed.
+
+## What I would tell another indie
+
+1. Treat approval as the start of recruitment, not the launch.  
+2. Put Group + opt-in + “same Gmail on the phone” in one message.  
+3. Recruit for the product you are shipping, not only for a headcount.  
+4. Check opted-in count and Group count as two separate dials.  
+5. Keep a dated list of feedback and fixes — Google asks for that summary when you apply.  
+6. Do not announce a public store launch from a closed test.
+
+## Where Salah Upgrader stood on that snapshot
+
+As of **9 November 2026** (Asia/Dhaka):
+
+- Closed testing was available to selected testers  
+- At least 12 testers were opted in, with the continuous 14-day window only just started (day 1 on that snapshot)  
+- Production was inactive  
+- The four feedback fixes above were merged in code, not yet on the Play build  
+- The public store page was still not a public product page
+
+Product: [mahmudulhossain.com/salah-upgrader](/salah-upgrader)  
+Privacy: [mahmudulhossain.com/salah-upgrader/privacy](/salah-upgrader/privacy)
+
+I am still in the tester window. The work now is keeping people opted in, listening, and shipping the fixes they earned — without pretending the app is already public.
