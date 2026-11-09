@@ -17,7 +17,7 @@ export default function BlogPostCard({ post, priority = false }: BlogPostCardPro
         <Link href={`/blog/${post.slug}`} className="blog-card-cover-link" tabIndex={-1}>
           <Image
             src={post.coverImage}
-            alt=""
+            alt={post.coverAlt ?? ""}
             width={640}
             height={360}
             className="blog-card-cover"

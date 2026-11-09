@@ -3,6 +3,7 @@ export interface BlogPostFrontmatter {
   slug: string;
   excerpt: string;
   coverImage?: string;
+  coverAlt?: string;
   publishedAt: string;
   updatedAt?: string;
   tags: string[];
