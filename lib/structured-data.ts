@@ -34,9 +34,14 @@ function portraitUrl() {
   return `${siteConfig.url}${siteConfig.portrait}`;
 }
 
-/** Profile URLs already declared in site config. Do not add profiles that are not listed there. */
+/** Public profile pages only. WhatsApp is a contact link and is not a sameAs URL. */
 function profileUrls() {
-  return Object.values(siteConfig.socials);
+  return [
+    siteConfig.socials.github,
+    siteConfig.socials.linkedin,
+    siteConfig.socials.x,
+    siteConfig.socials.facebook,
+  ];
 }
 
 export function siteJsonLd() {

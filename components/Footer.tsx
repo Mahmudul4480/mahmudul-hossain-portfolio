@@ -8,7 +8,8 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="wrap">
         <p>
-          © {year} {siteConfig.name}. Built and deployed solo.
+          © {year} {siteConfig.name} · {siteConfig.location.locality}, {siteConfig.location.country}
+          . Built and deployed solo.
         </p>
         <div className="foot-links">
           {siteConfig.footerLinks.map((link) => (
