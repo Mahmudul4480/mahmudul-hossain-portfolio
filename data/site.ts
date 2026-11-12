@@ -22,6 +22,7 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/mahmudul-hossain/",
     x: "https://x.com/Mahmudul4480",
     facebook: "https://www.facebook.com/mahmudul4480/",
+    youtube: "https://www.youtube.com/@mahmudulhossain837",
   },
   navLinks: [
     { label: "Work", href: "/#work" },

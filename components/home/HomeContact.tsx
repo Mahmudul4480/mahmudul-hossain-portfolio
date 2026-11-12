@@ -69,6 +69,11 @@ export default function HomeContact() {
             LinkedIn ↗
           </a>
         </li>
+        <li>
+          <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">
+            YouTube ↗
+          </a>
+        </li>
       </ul>
       <div className="h-contact-bar">
         <p>

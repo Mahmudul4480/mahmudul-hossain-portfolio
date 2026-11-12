@@ -41,6 +41,7 @@ function profileUrls() {
     siteConfig.socials.linkedin,
     siteConfig.socials.x,
     siteConfig.socials.facebook,
+    siteConfig.socials.youtube,
   ];
 }
 

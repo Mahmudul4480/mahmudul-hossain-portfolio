@@ -29,6 +29,7 @@ ${siteConfig.name} (${siteConfig.nameBn}) is an independent full-stack web and a
 - LinkedIn: ${siteConfig.socials.linkedin}
 - X: ${siteConfig.socials.x}
 - Facebook: ${siteConfig.socials.facebook}
+- YouTube: ${siteConfig.socials.youtube}
 
 ## Pages
 
