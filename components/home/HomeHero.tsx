@@ -19,7 +19,7 @@ export default function HomeHero() {
         className="h-hero-photo"
         data-parallax="true"
         src="/assets/mahmudul-hero.png"
-        alt="Mahmudul Hossain, full-stack engineer and SaaS architect"
+        alt="Mahmudul Hossain, full-stack web and app developer in Chattogram, Bangladesh"
         width={963}
         height={995}
         priority

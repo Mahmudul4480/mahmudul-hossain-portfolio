@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { Caveat } from "next/font/google";
 import Link from "next/link";
+import { siteConfig } from "@/data/site";
 import BlogPreview from "@/components/BlogPreview";
 import WorkflowVideo from "@/components/WorkflowVideo";
 import FluidBackground from "@/components/home/FluidBackground";
@@ -23,6 +25,33 @@ const script = Caveat({
   variable: "--font-script",
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  title: { absolute: siteConfig.seoTitle },
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  alternates: {
+    canonical: siteConfig.url,
+    types: {
+      "application/rss+xml": `${siteConfig.url}/feed.xml`,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.seoTitle,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@Mahmudul4480",
+    creator: "@Mahmudul4480",
+    title: siteConfig.seoTitle,
+    description: siteConfig.description,
+  },
+};
 
 export default function HomePage() {
   return (

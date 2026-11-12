@@ -14,6 +14,7 @@ import { getAllPosts, getPostBySlug, getPostHeadings, getRelatedPosts } from "@/
 import type { BlogPost } from "@/lib/blog-types";
 import { compileBlogMdx } from "@/lib/mdx";
 import { siteConfig } from "@/data/site";
+import { personReference } from "@/lib/structured-data";
 
 interface BlogPostPageProps {
   params: { slug: string };
@@ -79,11 +80,7 @@ function articleJsonLd(post: BlogPost) {
     image,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
-    author: {
-      "@type": "Person",
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
+    author: personReference(),
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,

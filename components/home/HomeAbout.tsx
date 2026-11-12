@@ -1,6 +1,13 @@
+import { Noto_Sans_Bengali } from "next/font/google";
 import Image from "next/image";
 import { sectionImages } from "@/data/section-images";
 import { siteConfig } from "@/data/site";
+
+const bengali = Noto_Sans_Bengali({
+  subsets: ["bengali"],
+  weight: ["500"],
+  display: "swap",
+});
 
 const focus = [
   "High-performance frontend",
@@ -18,7 +25,7 @@ export default function HomeAbout() {
         <div className="h-expand" data-expand>
           <Image
             src={sectionImages.about}
-            alt="Mahmudul Hossain, independent full-stack engineer and SaaS architect"
+            alt="Mahmudul Hossain (মাহমুদুল হোসাইন), full-stack web and app developer in Chattogram, Bangladesh"
             width={2400}
             height={1340}
             className="h-expand-img"
@@ -35,9 +42,14 @@ export default function HomeAbout() {
           </h2>
           <div className="h-prose">
             <p>
-              I&apos;m <strong>{siteConfig.name}</strong>, an independent full-stack engineer and
-              SaaS architect. I don&apos;t run an agency, and I don&apos;t outsource — every line of
-              code across every project above was written by me.
+              I&apos;m <strong>{siteConfig.name}</strong> (
+              <span lang="bn" className={bengali.className}>
+                {siteConfig.nameBn}
+              </span>
+              ), an independent full-stack web and app developer and SaaS architect in{" "}
+              {siteConfig.location.locality}, {siteConfig.location.country}. I don&apos;t run an
+              agency, and I don&apos;t outsource — every line of code across every project above was
+              written by me.
             </p>
             <p>
               That means no handoffs between a designer, a backend developer and a project manager

@@ -16,6 +16,7 @@ import type { Project } from "@/data/projects";
 import { getProjectBySlug } from "@/data/projects";
 import { getRelatedServices, getServiceBySlug, services, type Service } from "@/data/services";
 import { siteConfig } from "@/data/site";
+import { personReference } from "@/lib/structured-data";
 
 interface ServicePageProps {
   params: { slug: string };
@@ -58,12 +59,7 @@ function serviceJsonLd(service: Service) {
     name: service.name,
     description: service.metaDescription,
     url: `${siteConfig.url}/services/${service.slug}`,
-    provider: {
-      "@type": "Person",
-      name: siteConfig.name,
-      url: siteConfig.url,
-      email: siteConfig.email,
-    },
+    provider: personReference(),
     areaServed: {
       "@type": "Place",
       name: "Worldwide",

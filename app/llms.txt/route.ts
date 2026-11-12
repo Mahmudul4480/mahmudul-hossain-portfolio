@@ -18,7 +18,7 @@ export function GET() {
 
 > ${siteConfig.description}
 
-${siteConfig.name} is an independent full-stack engineer and SaaS architect. He works solo — no agency roster — and owns the technical delivery end to end.
+${siteConfig.name} (${siteConfig.nameBn}) is an independent full-stack web and app developer and SaaS architect in ${siteConfig.location.locality}, ${siteConfig.location.country}. He works solo — no agency roster — and owns the technical delivery end to end.
 
 ## Contact
 
@@ -27,6 +27,8 @@ ${siteConfig.name} is an independent full-stack engineer and SaaS architect. He 
 - WhatsApp: ${siteConfig.whatsapp}
 - GitHub: ${siteConfig.socials.github}
 - LinkedIn: ${siteConfig.socials.linkedin}
+- X: ${siteConfig.socials.x}
+- Facebook: ${siteConfig.socials.facebook}
 
 ## Pages
 
