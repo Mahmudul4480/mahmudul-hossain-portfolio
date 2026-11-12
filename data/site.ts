@@ -1,12 +1,19 @@
 export const siteConfig = {
   name: "Mahmudul Hossain",
+  nameBn: "মাহমুদুল হোসাইন",
   title: "Full-Stack Engineer & SaaS Architect",
   tagline: "Full-stack engineer · SaaS architect · Solo, no agency",
-  seoTitle: "Mahmudul Hossain — Full-Stack Web & App Developer",
+  seoTitle: "Mahmudul Hossain – Full-Stack Web & App Developer, Chattogram",
   alternateNames: ["Mahmudul", "Mahmudul4480", "মাহমুদুল হোসাইন"],
   description:
-    "Mahmudul Hossain — independent full-stack engineer and SaaS architect specializing in Next.js, React, Node.js and secure multi-tenant database architecture. Solo developer. 100% technical ownership.",
+    "Mahmudul Hossain (মাহমুদুল হোসাইন) is a full-stack web and app developer and SaaS architect in Chattogram, Bangladesh. Next.js, React, Node.js, and secure multi-tenant architecture. Solo — full technical ownership.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mahmudulhossain.com",
+  portrait: "/assets/mahmudul-hero.png",
+  location: {
+    locality: "Chattogram",
+    country: "Bangladesh",
+    countryCode: "BD",
+  },
   email: "hello@mahmudulhossain.com",
   phone: "01761870650",
   whatsapp: "https://wa.me/8801761870650",
@@ -15,6 +22,7 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/mahmudul-hossain/",
     x: "https://x.com/Mahmudul4480",
     facebook: "https://www.facebook.com/mahmudul4480/",
+    youtube: "https://www.youtube.com/@mahmudulhossain837",
   },
   navLinks: [
     { label: "Work", href: "/#work" },
@@ -33,11 +41,16 @@ export const siteConfig = {
     { label: "Contact", href: "/#contact" },
   ],
   /** Change this when homepage or service copy changes. Sitemap uses it as lastmod. */
-  contentUpdated: "2026-10-22",
+  contentUpdated: "2026-11-12",
   locale: "en_US",
   themeColor: "#090D16",
   keywords: [
     "Mahmudul Hossain",
+    "মাহমুদুল হোসাইন",
+    "Mahmudul Hossain developer",
+    "Mahmudul Hossain web developer",
+    "web developer Chattogram",
+    "app developer Chattogram",
     "full-stack engineer",
     "SaaS architect",
     "Next.js developer",

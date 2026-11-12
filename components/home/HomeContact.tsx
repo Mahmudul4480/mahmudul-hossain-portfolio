@@ -49,6 +49,9 @@ export default function HomeContact() {
       </div>
       <ul className="h-contact-meta">
         <li>
+          {siteConfig.location.locality}, {siteConfig.location.country}
+        </li>
+        <li>
           <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
             WhatsApp · {siteConfig.phone}
           </a>
@@ -66,10 +69,16 @@ export default function HomeContact() {
             LinkedIn ↗
           </a>
         </li>
+        <li>
+          <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">
+            YouTube ↗
+          </a>
+        </li>
       </ul>
       <div className="h-contact-bar">
         <p>
-          © {year} {siteConfig.name}. Built and deployed solo.
+          © {year} {siteConfig.name} · {siteConfig.location.locality}, {siteConfig.location.country}
+          . Built and deployed solo.
         </p>
         <div>
           {siteConfig.footerLinks.map((link) => (

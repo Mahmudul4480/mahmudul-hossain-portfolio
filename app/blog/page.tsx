@@ -9,6 +9,7 @@ import { getAllPosts, getAllTags } from "@/lib/blog.server";
 import { toPostSummary } from "@/lib/blog-utils";
 import { siteConfig } from "@/data/site";
 import { buildPageMetadata, jsonLd } from "@/lib/seo";
+import { personId } from "@/lib/structured-data";
 
 const blogDescription =
   "Articles on multi-tenant SaaS, PostgreSQL RLS, Next.js architecture, and hiring technical freelancers — from Mahmudul Hossain, solo full-stack engineer.";
@@ -36,21 +37,19 @@ export default function BlogIndexPage() {
     description: blogDescription,
     url: `${siteConfig.url}/blog`,
     inLanguage: "en",
-    author: { "@id": `${siteConfig.url}/#person` },
+    author: { "@id": personId() },
     blogPost: posts.slice(0, 12).map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       url: `${siteConfig.url}/blog/${post.slug}`,
       datePublished: post.publishedAt,
+      author: { "@id": personId() },
     })),
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(blogJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(blogJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

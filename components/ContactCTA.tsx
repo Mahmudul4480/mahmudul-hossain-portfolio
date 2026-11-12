@@ -51,6 +51,9 @@ export default function ContactCTA() {
               <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer">
                 LinkedIn ↗
               </a>
+              <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">
+                YouTube ↗
+              </a>
             </div>
           </div>
         </SectionVisual>
