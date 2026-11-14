@@ -8,7 +8,7 @@ function websiteId() {
   return `${siteConfig.url}/#website`;
 }
 
-function telephone() {
+export function siteTelephone() {
   const digits = siteConfig.phone.replace(/\D/g, "");
   return digits.startsWith("880") ? `+${digits}` : `+880${digits.replace(/^0/, "")}`;
 }
@@ -35,7 +35,7 @@ function portraitUrl() {
 }
 
 /** Public profile pages only. WhatsApp is a contact link and is not a sameAs URL. */
-function profileUrls() {
+export function personSameAs() {
   return [
     siteConfig.socials.github,
     siteConfig.socials.linkedin,
@@ -48,7 +48,7 @@ function profileUrls() {
 export function siteJsonLd() {
   const person = personId();
   const website = websiteId();
-  const sameAs = profileUrls();
+  const sameAs = personSameAs();
 
   return {
     "@context": "https://schema.org",
@@ -64,7 +64,7 @@ export function siteJsonLd() {
         url: siteConfig.url,
         image: portraitUrl(),
         email: siteConfig.email,
-        telephone: telephone(),
+        telephone: siteTelephone(),
         address: postalAddress(),
         sameAs,
         knowsAbout: [...siteConfig.knowsAbout],
@@ -98,7 +98,7 @@ export function siteJsonLd() {
         url: siteConfig.url,
         image: portraitUrl(),
         email: siteConfig.email,
-        telephone: telephone(),
+        telephone: siteTelephone(),
         description: siteConfig.description,
         address: postalAddress(),
         founder: { "@id": person },

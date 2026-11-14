@@ -49,6 +49,9 @@ export default function HomeContact() {
       </div>
       <ul className="h-contact-meta">
         <li>
+          <Link href="/services/web-developer-chittagong">Web developer in Chittagong</Link>
+        </li>
+        <li>
           {siteConfig.location.locality}, {siteConfig.location.country}
         </li>
         <li>
