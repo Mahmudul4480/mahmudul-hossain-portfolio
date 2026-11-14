@@ -107,7 +107,7 @@ function Hero() {
         </p>
         <p className="ctg-en">Based in Chattogram. Web, software, and Android — one person, start to launch.</p>
         <div className="ctg-cta-row">
-          <a className="ctg-btn ctg-btn--red" href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
+          <a className="ctg-btn ctg-btn--whatsapp" href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
             WhatsApp me
           </a>
           <Link className="ctg-btn ctg-btn--ghost" href={webDeveloperChittagong.ctaHref ?? "/#contact"}>
@@ -456,7 +456,7 @@ function Visit() {
             I&apos;ll reply with a scope and a quote — no package price until I understand the job.
           </p>
           <div className="ctg-cta-row">
-            <a className="ctg-btn ctg-btn--red" href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
+            <a className="ctg-btn ctg-btn--whatsapp" href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
               WhatsApp me
             </a>
             <a className="ctg-btn ctg-btn--ghost" href={`mailto:${siteConfig.email}`}>
