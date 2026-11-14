@@ -6,8 +6,13 @@ import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import RelatedServices from "@/components/RelatedServices";
 import Reveal from "@/components/Reveal";
+import {
+  ChittagongHeroArt,
+  ChittagongMarquee,
+  ChittagongScenes,
+  ChittagongVoyage,
+} from "@/components/ChittagongMotion";
 import ServiceContactCTA from "@/components/ServiceContactCTA";
-import ServiceProcess from "@/components/ServiceProcess";
 import {
   chittagongAreas,
   chittagongBangla,
@@ -173,19 +178,23 @@ export default function WebDeveloperChittagongPage() {
                   </Link>
                 </div>
               </div>
-              <div className="local-hero-panel" aria-hidden="true">
-                <p className="mono">Based in Chattogram</p>
-                <p className="local-hero-line">
-                  Web, software, and Android — one person, start to launch.
-                </p>
-                <ul className="local-chips">
-                  {["Next.js", "React", "Supabase", "Firebase", "Flutter"].map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+              <div className="local-hero-panel">
+                <ChittagongHeroArt />
+                <div className="local-hero-panel-copy">
+                  <p className="mono">Based in Chattogram</p>
+                  <p className="local-hero-line">
+                    Web, software, and Android — one person, start to launch.
+                  </p>
+                  <ul className="local-chips">
+                    {["Next.js", "React", "Supabase", "Firebase", "Flutter"].map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </Reveal>
           </div>
+          <ChittagongMarquee />
         </section>
 
         <section className="section" id="build">
@@ -285,23 +294,25 @@ export default function WebDeveloperChittagongPage() {
           </div>
         </section>
 
-        <section className="section">
-          <div className="wrap service-detail-grid">
+        <section className="section" id="process">
+          <div className="wrap local-section">
             <Reveal>
               <h2>How a project runs</h2>
               <p className="local-lede">
                 Four steps. You don&apos;t need a specification — send the list below and I can say
                 whether I&apos;m the right person, and what the job actually is.
               </p>
+            </Reveal>
+          </div>
+          <ChittagongVoyage steps={chittagongProcess} />
+          <div className="wrap">
+            <Reveal>
               <h3 className="service-subhead">What helps me quote</h3>
               <ul className="service-checklist">
                 {chittagongPrep.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-            </Reveal>
-            <Reveal>
-              <ServiceProcess steps={chittagongProcess} />
             </Reveal>
           </div>
         </section>
@@ -325,6 +336,7 @@ export default function WebDeveloperChittagongPage() {
                   States, and Canada who want one engineer rather than an agency. Where we meet
                   changes. Who writes the code does not.
                 </p>
+                <ChittagongScenes />
               </div>
             </Reveal>
           </div>
