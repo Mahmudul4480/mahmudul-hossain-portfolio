@@ -1,6 +1,7 @@
 import {
   Globe,
   Layout,
+  MapPin,
   Megaphone,
   Monitor,
   Palette,
@@ -20,6 +21,7 @@ const iconMap: Record<ServiceIconName, LucideIcon> = {
   Monitor,
   Globe,
   ShieldAlert,
+  MapPin,
 };
 
 interface ServiceIconProps {

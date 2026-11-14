@@ -14,6 +14,7 @@ import ServiceContactCTA from "@/components/ServiceContactCTA";
 import Reveal from "@/components/Reveal";
 import type { Project } from "@/data/projects";
 import { getProjectBySlug } from "@/data/projects";
+import WebDeveloperChittagongPage from "@/components/WebDeveloperChittagongPage";
 import { getRelatedServices, getServiceBySlug, services, type Service } from "@/data/services";
 import { siteConfig } from "@/data/site";
 import { personReference } from "@/lib/structured-data";
@@ -34,9 +35,13 @@ export function generateMetadata({ params }: ServicePageProps): Metadata {
   const url = `${siteConfig.url}/services/${service.slug}`;
 
   return {
-    title,
+    title: service.absoluteTitle ? { absolute: title } : title,
     description: service.metaDescription,
-    keywords: [service.name, "Mahmudul Hossain", ...siteConfig.keywords.slice(0, 4)],
+    keywords: service.seoKeywords ?? [
+      service.name,
+      "Mahmudul Hossain",
+      ...siteConfig.keywords.slice(0, 4),
+    ],
     alternates: { canonical: url },
     openGraph: {
       title,
@@ -85,6 +90,10 @@ function faqJsonLd(service: Service) {
 export default function ServiceDetailPage({ params }: ServicePageProps) {
   const service = getServiceBySlug(params.slug);
   if (!service) notFound();
+
+  if (service.slug === "web-developer-chittagong") {
+    return <WebDeveloperChittagongPage />;
+  }
 
   const relatedProjects = service.relatedProjectSlugs
     .map((slug) => getProjectBySlug(slug))

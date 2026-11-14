@@ -1,5 +1,7 @@
+import { webDeveloperChittagong } from "@/data/web-developer-chittagong";
+
 export type ServiceIconName =
-  "Megaphone" | "Target" | "Search" | "Palette" | "Layout" | "Monitor" | "Globe" | "ShieldAlert";
+  "Megaphone" | "Target" | "Search" | "Palette" | "Layout" | "Monitor" | "Globe" | "ShieldAlert" | "MapPin";
 
 export interface ServiceSection {
   heading: string;
@@ -22,6 +24,8 @@ export interface ServiceProcessStep {
 export interface ServiceFaq {
   question: string;
   answer: string;
+  /** Set for questions written in Bangla so the page can render them with a Bengali font. */
+  lang?: "en" | "bn";
 }
 
 export interface Service {
@@ -46,6 +50,9 @@ export interface Service {
   ctaLabel?: string;
   eyebrow?: string;
   heroImage?: { src: string; alt: string; width: number; height: number; chip?: string };
+  /** Bypass the root title template when the meta title already includes the name. */
+  absoluteTitle?: boolean;
+  seoKeywords?: string[];
 }
 
 export const services: Service[] = [
@@ -562,6 +569,7 @@ export const services: Service[] = [
     relatedProjectSlugs: ["tideway-shipping", "proactive-security-bd", "b2b-lead-portal"],
     featured: true,
   },
+  webDeveloperChittagong,
   {
     slug: "domain-hosting-business-email",
     name: "Domain, Hosting & Business Email Setup",
